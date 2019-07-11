@@ -1,0 +1,10 @@
+{
+  "name": "datatypes-validation",
+  "version": "2.0.0-development-01",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "nested-property": "^1.0.1",
+    "typescript": "^3.5.3"
+  }
+}
