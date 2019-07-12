@@ -3,6 +3,7 @@ import {TypeObject} from "./types/TypeObject";
 import {TypeString} from "./types/TypeString";
 import {TypeArray} from "./types/TypeArray";
 import {Types} from "./types/Types";
+import {TypeNumber} from "./types/TypeNumber";
 
 export class DataTypes {
 
@@ -13,7 +14,6 @@ export class DataTypes {
     private _data : any = {};
 
     private async _createField(path: string, value: any, type: any){
-        console.log({path, value})
         if(!this._fields[path]) {
             this._fields[path] = {
                 path,
@@ -122,4 +122,7 @@ export class DataTypes {
         await datatypes.validate();
     }
 
+    static isNumber() {
+        return new TypeNumber().isNumber()
+    }
 }
