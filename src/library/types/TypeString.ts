@@ -109,6 +109,19 @@ export class TypeString extends Types {
         return this
     }
 
+    public regex(data:string){
+        this.commons.regex = async(field: IField) => {
+            const verify = new RegExp(data).test(field.value);
+            if (this.checkRequirements(field) && verify){
+                return this.applyError(
+                    'string.regex',
+                    'Valor com caractere ou expressão inválida',
+                    `O campo ${field.label || field.path} contém um valor diferente dos definidos`
+                )
+            }
+        }
+        return this
+    }
     //TODO: CRIAR O MÉTODO EQUAL()
     //TODO: CRIAR O MÉTODO ALLOW
 
