@@ -11,13 +11,11 @@ export class TypeArray extends Types {
         this.commons.array = async (field: IField) => {
             const verify = !Array.isArray(field.value);
             if(this.checkRequirements(field) && verify) {
-                const error = this.applyError(
+                return this.applyError(
                     'array',
                     'Deve ser um array',
                     `O campo ${field.label || field.path} deve ser um array`
                 )
-
-                console.log({error});
             }
         };
 
@@ -29,7 +27,7 @@ export class TypeArray extends Types {
             const verify = !field.value
             if(verify) {
                 return this.applyError(
-                    'required',
+                    'array.required',
                     'Campo obrigatório',
                     `O campo ${field.label || field.path} é obrigatório`
                 )
@@ -44,7 +42,7 @@ export class TypeArray extends Types {
             const verify = this.checkRequirements(field) && field.value.length < min;
             if(verify) {
                 return this.applyError(
-                    'min',
+                    'array.min',
                     'Campo obrigatório',
                     `O campo ${field.label || field.path} é obrigatório`,
                     {
@@ -64,7 +62,7 @@ export class TypeArray extends Types {
             const verify = this.checkRequirements(field) && field.value.length > max;
             if(verify) {
                 return this.applyError(
-                    'max',
+                    'array.max',
                     'Campo obrigatório',
                     `O campo ${field.label || field.path} é obrigatório`,
                     {

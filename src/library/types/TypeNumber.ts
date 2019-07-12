@@ -8,7 +8,7 @@ export class TypeNumber extends Types {
             const verify = typeof field.value !== "number";
             if(this.checkRequirements(field) && verify) {
                 return this.applyError (
-                    'required',
+                    'number',
                     'Valor deve ser numérico',
                     `O campo ${field.label || field.path} é inválido`
                 )
@@ -22,7 +22,7 @@ export class TypeNumber extends Types {
             const verify = (field.value < min || field.value > max);
             if(this.checkRequirements(field) && verify) {
                 return this.applyError(
-                    'required',
+                    'number.between',
                     `Valor deve estar entre ${min} e ${max}`,
                     `O campo ${field.label || field.path} é inválido`
                 )
@@ -31,12 +31,12 @@ export class TypeNumber extends Types {
         return this;
     }
 
-    public greaterThen(value: number){
-        this.commons.greaterThen = async (field: IField) => {
+    public greater(value: number){
+        this.commons.greater = async (field: IField) => {
             const verify = (field.value <= value);
             if(this.checkRequirements(field) && verify) {
                 return this.applyError(
-                    'required',
+                    'number.greater',
                     `Valor deve ser maior que ${value}`,
                     `O campo ${field.label || field.path} é inválido`
                 )
@@ -45,12 +45,12 @@ export class TypeNumber extends Types {
         return this;
     }
 
-    public lessThen(value: number){
-        this.commons.lessThen = async (field: IField) => {
+    public less(value: number){
+        this.commons.less = async (field: IField) => {
             const verify = (field.value >= value);
             if(this.checkRequirements(field) && verify) {
                 return this.applyError(
-                    'required',
+                    'number.less',
                     `Valor deve ser menor que ${value}`,
                     `O campo ${field.label || field.path} é inválido`
                 )
@@ -59,12 +59,12 @@ export class TypeNumber extends Types {
         return this;
     }
 
-    public greaterOrEqualThen(value: number){
-        this.commons.greaterOrEqualThen = async (field: IField) => {
+    public greaterOrEqual(value: number){
+        this.commons.greaterOrEqual = async (field: IField) => {
             const verify = (field.value < value);
             if(this.checkRequirements(field) && verify) {
                 return this.applyError(
-                    'required',
+                    'number.greaterOrEqual',
                     `Valor deve ser maior ou igual a ${value}`,
                     `O campo ${field.label || field.path} é inválido`
                 )
@@ -73,12 +73,12 @@ export class TypeNumber extends Types {
         return this;
     }
 
-    public lessOrEqualThen(value: number){
-        this.commons.lessOrEqualThen = async (field: IField) => {
+    public lessOrEqual(value: number){
+        this.commons.lessOrEqual = async (field: IField) => {
             const verify = (field.value > value);
             if(this.checkRequirements(field) && verify) {
                 return this.applyError(
-                    'required',
+                    'number.lessOrEqual',
                     `Valor deve ser menor ou igual a ${value}`,
                     `O campo ${field.label || field.path} é inválido`
                 )
@@ -87,12 +87,12 @@ export class TypeNumber extends Types {
         return this;
     }
 
-    public differentThan(value: number){
-        this.commons.differentThan = async (field: IField) => {
+    public notEqual(value: number){
+        this.commons.notEqual = async (field: IField) => {
             const verify = (field.value === value);
             if(this.checkRequirements(field) && verify) {
                 return this.applyError(
-                    'required',
+                    'number.notEqual',
                     `Valor deve ser diferente de ${value}`,
                     `O campo ${field.label || field.path} é inválido`
                 )
@@ -101,12 +101,12 @@ export class TypeNumber extends Types {
         return this;
     }
 
-    public equalThan(value: number){
-        this.commons.equalThan = async (field: IField) => {
+    public equalTo(value: number){
+        this.commons.equalTo = async (field: IField) => {
             const verify = (field.value !== value);
             if(this.checkRequirements(field) && verify) {
                 return this.applyError(
-                    'required',
+                    'number.equalTo',
                     `Valor deve ser igual a ${value}`,
                     `O campo ${field.label || field.path} é inválido`
                 )
@@ -120,7 +120,7 @@ export class TypeNumber extends Types {
             const verify = (field.value < 0);
             if(this.checkRequirements(field) && verify) {
                 return this.applyError(
-                    'required',
+                    'number.positive',
                     `Valor deve ser positivo`,
                     `O campo ${field.label || field.path} é inválido`
                 )
@@ -134,7 +134,7 @@ export class TypeNumber extends Types {
             const verify = (field.value >= 0);
             if(this.checkRequirements(field) && verify) {
                 return this.applyError(
-                    'required',
+                    'number.negative',
                     `Valor deve ser negativo`,
                     `O campo ${field.label || field.path} é inválido`
                 )
@@ -143,12 +143,12 @@ export class TypeNumber extends Types {
         return this;
     }
 
-    public isInteger(){
-        this.commons.isInteger = async (field: IField) => {
+    public integer(){
+        this.commons.integer = async (field: IField) => {
             const verify = (field.value % 1 !== 0);
             if(this.checkRequirements(field) && verify) {
                 return this.applyError(
-                    'required',
+                    'number.integer',
                     `Valor deve ser do tipo inteiro`,
                     `O campo ${field.label || field.path} é inválido`
                 )
@@ -157,12 +157,12 @@ export class TypeNumber extends Types {
         return this;
     }
 
-    public isFloat(){
-        this.commons.isFloat = async (field: IField) => {
+    public float(){
+        this.commons.float = async (field: IField) => {
             const verify = (field.value % 1 === 0);
             if(this.checkRequirements(field) && verify) {
                 return this.applyError(
-                    'required',
+                    'number.float',
                     `Valor deve ser decimal`,
                     `O campo ${field.label || field.path} é inválido`
                 )
@@ -171,12 +171,12 @@ export class TypeNumber extends Types {
         return this;
     }
 
-    public isEven(){
-        this.commons.isEven = async (field: IField) => {
+    public even(){
+        this.commons.even = async (field: IField) => {
             const verify = (field.value % 2 !== 0);
             if(this.checkRequirements(field) && verify) {
                 return this.applyError(
-                    'required',
+                    'number.even',
                     `Valor deve ser par`,
                     `O campo ${field.label || field.path} é inválido`
                 )
@@ -185,17 +185,33 @@ export class TypeNumber extends Types {
         return this;
     }
 
-    public isOdd(){
-        this.commons.isOdd = async (field: IField) => {
+    public odd(){
+        this.commons.odd = async (field: IField) => {
             const verify = (field.value % 2 === 0);
             if(this.checkRequirements(field) && verify) {
                 return this.applyError(
-                    'required',
+                    'number.odd',
                     `Valor deve ser ímpar`,
                     `O campo ${field.label || field.path} é inválido`
                 )
             }
         };
+        return this;
+    }
+
+    public isRequired() {
+
+        this.commons.required = async (field: IField) => {
+            const verify = !field.value
+            if(verify) {
+                return this.applyError(
+                    'number.required',
+                    'Campo obrigatório',
+                    `O campo ${field.label || field.path} é obrigatório`
+                )
+            }
+        };
+
         return this;
     }
 

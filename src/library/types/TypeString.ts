@@ -9,7 +9,7 @@ export class TypeString extends Types {
             const verify = typeof field.value !== "string";
             if(this.checkRequirements(field) && verify) {
                 return this.applyError (
-                    'required',
+                    'string',
                     'Campo inválido',
                     `O campo ${field.label || field.path} é inválido`
                 )
@@ -25,7 +25,7 @@ export class TypeString extends Types {
             const verify = (field.value.toString().trim().length > data)
             if(this.checkRequirements(field) && verify) {
                 return this.applyError(
-                    'max',
+                    'string.max',
                     `Deve ter no máximo ${data} caracteres.`,
                     `O campo ${field.label || field.path} contém uma quantidade de caracteres superior a máxima`
                 )
@@ -41,7 +41,7 @@ export class TypeString extends Types {
             const verify = (field.value.toString().trim().length < data)
             if(this.checkRequirements(field) && verify) {
                 return this.applyError(
-                    'min',
+                    'string.min',
                     `Deve ter no mínimo ${data} caracteres.`,
                     `O campo ${field.label || field.path} contém uma quantidade de caracteres superior a máxima`
                 )
@@ -57,7 +57,7 @@ export class TypeString extends Types {
             const verify = (field.value.toString().trim().length < min || field.value.toString().trim().length > max)
             if(this.checkRequirements(field) && verify) {
                 return this.applyError(
-                    'between',
+                    'string.between',
                     `Deve ter entre ${min} e ${max} caracteres.`,
                     `O campo ${field.label || field.path} não contém a quantidade de caracteres necessária`,
                     {
@@ -77,7 +77,7 @@ export class TypeString extends Types {
             const verify = new RegExp(regex).test(field.value)
             if (this.checkRequirements(field) && !verify){
                 return this.applyError(
-                    'email',
+                    'string.email',
                     'E-mail inválido',
                         `O campo ${field.label || field.path} contém um valor inválido`
 
@@ -93,9 +93,14 @@ export class TypeString extends Types {
             const verify = (field.value === data)
             if (this.checkRequirements(field) && verify){
                 return this.applyError(
-                    'equal',
+                    'string.equal',
                     'Valor inválido',
-                    `O campo ${field.label || field.path} contém um valor diferente dos definidos`
+                    `O campo ${field.label || field.path} contém um valor diferente dos definidos`,
+                    {
+                        context:{
+                            data
+                        }
+                    }
 
                 )
             }
