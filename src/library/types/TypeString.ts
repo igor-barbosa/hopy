@@ -88,10 +88,10 @@ export class TypeString extends Types {
         return this
     }
 
-    public equal(data:string){
-        this.commons.equal = async(field: IField) => {
+    public equalTo(data:string){
+        this.commons.equalTo = async(field: IField) => {
             const verify = (field.value === data)
-            if (this.checkRequirements(field) && verify){
+            if (this.checkRequirements(field) && !verify){
                 return this.applyError(
                     'string.equal',
                     'Valor inválido',
@@ -122,7 +122,7 @@ export class TypeString extends Types {
         }
         return this
     }
-    //TODO: CRIAR O MÉTODO EQUAL()
+    
     //TODO: CRIAR O MÉTODO ALLOW
 
 }
