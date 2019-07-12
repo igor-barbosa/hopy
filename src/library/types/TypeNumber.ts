@@ -22,7 +22,7 @@ export class TypeNumber extends Types {
             const verify = (field.value < min || field.value > max);
             if(this.checkRequirements(field) && verify) {
                 return this.applyError(
-                    'required',
+                    'between',
                     `Valor deve estar entre ${min} e ${max}`,
                     `O campo ${field.label || field.path} é inválido`
                 )
@@ -36,7 +36,7 @@ export class TypeNumber extends Types {
             const verify = (field.value <= value);
             if(this.checkRequirements(field) && verify) {
                 return this.applyError(
-                    'required',
+                    'greaterThen',
                     `Valor deve ser maior que ${value}`,
                     `O campo ${field.label || field.path} é inválido`
                 )
@@ -50,7 +50,7 @@ export class TypeNumber extends Types {
             const verify = (field.value >= value);
             if(this.checkRequirements(field) && verify) {
                 return this.applyError(
-                    'required',
+                    'lessThen',
                     `Valor deve ser menor que ${value}`,
                     `O campo ${field.label || field.path} é inválido`
                 )
@@ -64,7 +64,7 @@ export class TypeNumber extends Types {
             const verify = (field.value < value);
             if(this.checkRequirements(field) && verify) {
                 return this.applyError(
-                    'required',
+                    'greaterOrEqualThen',
                     `Valor deve ser maior ou igual a ${value}`,
                     `O campo ${field.label || field.path} é inválido`
                 )
@@ -78,7 +78,7 @@ export class TypeNumber extends Types {
             const verify = (field.value > value);
             if(this.checkRequirements(field) && verify) {
                 return this.applyError(
-                    'required',
+                    'lessOrEqualThen',
                     `Valor deve ser menor ou igual a ${value}`,
                     `O campo ${field.label || field.path} é inválido`
                 )
@@ -92,7 +92,7 @@ export class TypeNumber extends Types {
             const verify = (field.value === value);
             if(this.checkRequirements(field) && verify) {
                 return this.applyError(
-                    'required',
+                    'differentThan',
                     `Valor deve ser diferente de ${value}`,
                     `O campo ${field.label || field.path} é inválido`
                 )
@@ -106,7 +106,7 @@ export class TypeNumber extends Types {
             const verify = (field.value !== value);
             if(this.checkRequirements(field) && verify) {
                 return this.applyError(
-                    'required',
+                    'equalThan',
                     `Valor deve ser igual a ${value}`,
                     `O campo ${field.label || field.path} é inválido`
                 )
@@ -120,7 +120,7 @@ export class TypeNumber extends Types {
             const verify = (field.value < 0);
             if(this.checkRequirements(field) && verify) {
                 return this.applyError(
-                    'required',
+                    'positive',
                     `Valor deve ser positivo`,
                     `O campo ${field.label || field.path} é inválido`
                 )
@@ -134,7 +134,7 @@ export class TypeNumber extends Types {
             const verify = (field.value >= 0);
             if(this.checkRequirements(field) && verify) {
                 return this.applyError(
-                    'required',
+                    'negative',
                     `Valor deve ser negativo`,
                     `O campo ${field.label || field.path} é inválido`
                 )
@@ -148,7 +148,7 @@ export class TypeNumber extends Types {
             const verify = (field.value % 1 !== 0);
             if(this.checkRequirements(field) && verify) {
                 return this.applyError(
-                    'required',
+                    'isInteger',
                     `Valor deve ser do tipo inteiro`,
                     `O campo ${field.label || field.path} é inválido`
                 )
@@ -162,7 +162,7 @@ export class TypeNumber extends Types {
             const verify = (field.value % 1 === 0);
             if(this.checkRequirements(field) && verify) {
                 return this.applyError(
-                    'required',
+                    'isFloat',
                     `Valor deve ser decimal`,
                     `O campo ${field.label || field.path} é inválido`
                 )
@@ -176,7 +176,7 @@ export class TypeNumber extends Types {
             const verify = (field.value % 2 !== 0);
             if(this.checkRequirements(field) && verify) {
                 return this.applyError(
-                    'required',
+                    'isEven',
                     `Valor deve ser par`,
                     `O campo ${field.label || field.path} é inválido`
                 )
@@ -190,7 +190,7 @@ export class TypeNumber extends Types {
             const verify = (field.value % 2 === 0);
             if(this.checkRequirements(field) && verify) {
                 return this.applyError(
-                    'required',
+                    'isOdd',
                     `Valor deve ser ímpar`,
                     `O campo ${field.label || field.path} é inválido`
                 )
