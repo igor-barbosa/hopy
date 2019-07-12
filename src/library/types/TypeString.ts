@@ -19,8 +19,6 @@ export class TypeString extends Types {
         return this;
     }
 
-
-
     public between(min: number, max: number) {
 
         this.commons.between = async (field: IField) => {
