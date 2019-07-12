@@ -1,6 +1,7 @@
 import NestedProperty from "nested-property";
 import {TypeObject} from "./types/TypeObject";
 import {TypeString} from "./types/TypeString";
+import {TypeNumber} from "./types/TypeNumber";
 
 export class DataTypes {
 
@@ -94,4 +95,7 @@ export class DataTypes {
         await datatypes.validate();
     }
 
+    static isNumber() {
+        return new TypeNumber().isNumber()
+    }
 }
