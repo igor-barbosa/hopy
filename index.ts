@@ -5,23 +5,12 @@ import {Field} from "./src/library/Field";
 
 
     const body = {
-        name: 'igorrbarbosaa@gmail.com'
+        name: 'Igor'
     };
 
-    const checkIfIsNotIgor = () => {
-        return async (field: Field) => {
-            if(field.value === 'Igor') {
-                return field.applyError(
-                    'checkIfIsIgor',
-                    'O valor não pode ser igual a Igor',
-                    `O campo ${field.label || field.path} não pode ser igual a Igor`
-                );
-            }
-        }
-    };
 
     const schema = {
-        name: DataTypes.isString().equal('igor').customHandlers()
+        cpf: DataTypes.isString().customHandlers()
     };
 
     const response = await DataTypes.check(body, schema);

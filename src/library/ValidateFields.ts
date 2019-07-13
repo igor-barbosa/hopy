@@ -62,21 +62,36 @@ export class ValidateFields {
         return new Field(path, NestedProperty.get(this._body, path), new Types());
     }
 
+    private setError(path: string, error: any) {
+        this._errors[path] = {
+            ...error,
+            path
+        };
+    }
+
     private async validateCommonMethods(type: Types, path: string) {
+        const field: Field = (type instanceof TypeObject || type instanceof TypeArray) ? this.makeField(path) : this._fields[path];
+
         for(const commonKey of Object.keys(type.commons)) {
-            const field: Field = (type instanceof TypeObject || type instanceof TypeArray) ? this.makeField(path) : this._fields[path];
             const validationFunction = type.commons[commonKey];
             const error = await validationFunction(field);
             if(error) {
-                this._errors[path] = {
-                    ...error,
-                    path
-                }
-            } else {
-                NestedProperty.set(this._data, path, field.value);
+                this.setError(path, error);
             }
-
         }
+
+        for(const customHandler of type.customHandlersList){
+            const error = await customHandler(field);
+            if(error) {
+                this.setError(path, error);
+            }
+        }
+
+        if(!this._errors[path]) {
+            NestedProperty.set(this._data, path, field.value);
+        }
+
+
     }
 
     public async init(body: any, schema: any) : Promise<ValidateFields> {
