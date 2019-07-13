@@ -1,5 +1,3 @@
-import {IField} from "../../interfaces/types/IField";
-
 export class Types {
 
     public commons: any = {};
@@ -20,26 +18,8 @@ export class Types {
         }
     }
 
-    // TODO: Renomear requisitos.
-    public checkRequirements(field: IField) {
-        return field.value && this.isValid();
-    }
+    public customHandlers(...handlers: any[]) {
 
-
-    public isRequired() {
-
-        this.commons.required = async (field: IField) => {
-            const verify = !field.value
-            if(verify) {
-                return this.applyError(
-                    'required',
-                    'Campo obrigatório',
-                    `O campo ${field.label || field.path} é obrigatório`
-                )
-            }
-        };
-
-        return this;
     }
 }
 

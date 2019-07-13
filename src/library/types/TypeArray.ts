@@ -1,6 +1,7 @@
 import {Types} from "./Types";
 import {IField} from "../../interfaces/types/IField";
 import {TypeObject} from "./TypeObject";
+import {Field} from "../Field";
 
 export class TypeArray extends Types {
 
@@ -8,10 +9,10 @@ export class TypeArray extends Types {
 
     public of(schemaOrRule: any) {
         this.customType = (schemaOrRule instanceof Types) ? schemaOrRule : new TypeObject().of(schemaOrRule)
-        this.commons.array = async (field: IField) => {
+        this.commons.array = async (field: Field) => {
             const verify = !Array.isArray(field.value);
-            if(this.checkRequirements(field) && verify) {
-                return this.applyError(
+            if(field.hasRequirements() && verify) {
+                return field.applyError(
                     'array',
                     'Deve ser um array',
                     `O campo ${field.label || field.path} deve ser um array`
@@ -23,10 +24,10 @@ export class TypeArray extends Types {
     }
 
     public required() {
-        this.commons.required = async (field: IField) => {
+        this.commons.required = async (field: Field) => {
             const verify = !field.value
             if(verify) {
-                return this.applyError(
+                return field.applyError(
                     'array.required',
                     'Campo obrigatório',
                     `O campo ${field.label || field.path} é obrigatório`
@@ -38,10 +39,10 @@ export class TypeArray extends Types {
     }
 
     public min(min: number) {
-        this.commons.min = async (field: IField) => {
-            const verify = this.checkRequirements(field) && field.value.length < min;
+        this.commons.min = async (field: Field) => {
+            const verify = field.hasRequirements() && field.value.length < min;
             if(verify) {
-                return this.applyError(
+                return field.applyError(
                     'array.min',
                     'Campo obrigatório',
                     `O campo ${field.label || field.path} é obrigatório`,
@@ -58,10 +59,10 @@ export class TypeArray extends Types {
     }
 
     public max(max: number) {
-        this.commons.max = async (field: IField) => {
-            const verify = this.checkRequirements(field) && field.value.length > max;
+        this.commons.max = async (field: Field) => {
+            const verify = field.hasRequirements() && field.value.length > max;
             if(verify) {
-                return this.applyError(
+                return field.applyError(
                     'array.max',
                     'Campo obrigatório',
                     `O campo ${field.label || field.path} é obrigatório`,

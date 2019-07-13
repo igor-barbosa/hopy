@@ -1,5 +1,5 @@
 import {Types} from "./Types";
-import {IField} from "../../interfaces/types/IField";
+import {Field} from "../Field";
 
 export class TypeObject extends Types {
 
@@ -7,10 +7,10 @@ export class TypeObject extends Types {
 
     public of(schema: any) {
         this.schema = schema;
-        this.commons.object = async (field: IField) => {
+        this.commons.object = async (field: Field) => {
             const verify = typeof field.value !== "object";
-            if(this.checkRequirements(field) && verify) {
-                return this.applyError(
+            if(field.hasRequirements() && verify) {
+                return field.applyError(
                     'object',
                     'Deve ser um objeto',
                     `O campo ${field.label || field.path} deve ser um objeto`
