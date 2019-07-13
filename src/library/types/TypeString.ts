@@ -98,9 +98,8 @@ export class TypeString extends Types {
     }
 
     public equal(data:string){
-
         this.commons.equal = async(field: Field) => {
-            const verify = (field.value === data)
+            const verify = (field.value !== data)
             if (field.hasRequirements() && verify){
                 return field.applyError(
                     'string.equal',
@@ -111,6 +110,7 @@ export class TypeString extends Types {
                             data
                         }
                     }
+
                 )
             }
         }
@@ -132,7 +132,7 @@ export class TypeString extends Types {
 
         return this
     }
-    //TODO: CRIAR O MÉTODO EQUAL()
+
     //TODO: CRIAR O MÉTODO ALLOW
 
 }
