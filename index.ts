@@ -5,12 +5,12 @@ import {Field} from "./src/library/Field";
 
 
     const body = {
-        name: 'Igor'
+        date: '03/01/1996'
     };
 
 
     const schema = {
-        cpf: DataTypes.isString().customHandlers()
+        date: DataTypes.date()
     };
 
     const response = await DataTypes.check(body, schema);

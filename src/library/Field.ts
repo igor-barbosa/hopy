@@ -5,6 +5,7 @@ export class Field {
 
     public path: string;
     public value: any;
+    public shadowValue: any = null;
     public type: Types;
     public allows: any[] = [];
     public label : string|null = null;
@@ -16,21 +17,21 @@ export class Field {
     }
 
     private hasAllowValues() {
-        return this.allows.indexOf(this.value) >= 0
-    }
-
-    public hasRequirements() {
-        console.log({
-            invalidAllows: this.hasAllowValues(),
-            hasError: !!this.error,
-            isNull: this.value !== null && this.value !== undefined
-        });
-
-        if(!this.hasAllowValues()){
-            return !this.error && this.value !== null && this.value !== undefined;
+        if(this.allows.length){
+            return this.allows.indexOf(this.value) >= 0
         } else {
             return false;
         }
+    }
+
+    public hasRequirements() {
+        console.log(this.error, this.value);
+        return !this.error && (this.value !== null && this.value !== undefined)
+        // if(!this.hasAllowValues()){
+        //     return !this.error && (this.value !== null && this.value !== undefined);
+        // } else {
+        //     return false;
+        // }
 
     }
 

@@ -3,6 +3,7 @@ import {TypeString} from "./types/TypeString";
 import {TypeArray} from "./types/TypeArray";
 import {TypeNumber} from "./types/TypeNumber";
 import {ValidateFields} from "./ValidateFields";
+import {TypeDate} from "./types/typeDate";
 
 export class DataTypes {
 
@@ -26,5 +27,9 @@ export class DataTypes {
 
     static isNumber() {
         return new TypeNumber().isNumber()
+    }
+
+    static date() {
+        return new TypeDate().date()
     }
 }
