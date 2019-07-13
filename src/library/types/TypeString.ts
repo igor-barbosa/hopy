@@ -8,7 +8,7 @@ export class TypeString extends Types {
         this.commons.string = async (field: Field) => {
             const verify = typeof field.value as String !== "string";
             if(field.hasRequirements() && verify) {
-                return this.applyError (
+                return field.applyError (
                     'string',
                     'Campo inválido',
                     `O campo ${field.label || field.path} é inválido`
