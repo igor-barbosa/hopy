@@ -6,7 +6,7 @@ export class Field {
     public path: string;
     public value: any;
     public type: Types;
-
+    public allows: any[] = [];
     public label : string|null = null;
 
     public error: any = null;
@@ -15,8 +15,23 @@ export class Field {
         return !this.error
     }
 
+    private hasAllowValues() {
+        return this.allows.indexOf(this.value) >= 0
+    }
+
     public hasRequirements() {
-        return !this.error && this.value !== null && this.value !== undefined ;
+        console.log({
+            invalidAllows: this.hasAllowValues(),
+            hasError: !!this.error,
+            isNull: this.value !== null && this.value !== undefined
+        });
+
+        if(!this.hasAllowValues()){
+            return !this.error && this.value !== null && this.value !== undefined;
+        } else {
+            return false;
+        }
+
     }
 
 

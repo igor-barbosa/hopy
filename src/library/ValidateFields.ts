@@ -71,7 +71,7 @@ export class ValidateFields {
 
     private async validateCommonMethods(type: Types, path: string) {
         const field: Field = (type instanceof TypeObject || type instanceof TypeArray) ? this.makeField(path) : this._fields[path];
-
+        if(type.checkAllows) type.checkAllows(field);
         for(const commonKey of Object.keys(type.commons)) {
             const validationFunction = type.commons[commonKey];
             const error = await validationFunction(field);

@@ -1,3 +1,5 @@
+import {Field} from "../Field";
+
 export class Types {
 
     public commons: any = {};
@@ -5,6 +7,8 @@ export class Types {
     public customHandlersList: Array<any> = []
 
     public error: any = null;
+
+    public checkAllows: any;
 
     public isValid() {
         return !this.error
@@ -15,5 +19,16 @@ export class Types {
 
         return this;
     }
+
+    public allow(...values: any[]) {
+       this.checkAllows = (field: Field) => {
+           field.allows = values
+       }
+
+       return this;
+    }
+
+
+
 }
 
