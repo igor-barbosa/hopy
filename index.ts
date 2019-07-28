@@ -5,20 +5,14 @@ import moment from 'moment'
 (async () => {
 
     const body = {
-        formations: [
-            {
-                startDate: '01/01/2000',
-                endDate: '01/01/1996'
-            }
-        ]
+        name: 'Igor2'
     };
 
 
     const schema = {
-        formations: DataTypes.arrayOf({
-            startDate: DataTypes.date(),
-            endDate: DataTypes.date(),
-        }).min(1)
+        name: DataTypes.conditional(async (params) => {
+            return params.value === 'Igor' ? DataTypes.isString().max(3) : DataTypes.isString().max(2)
+        })
     };
 
     const response = await DataTypes.check(body, schema);

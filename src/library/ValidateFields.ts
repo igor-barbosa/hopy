@@ -3,6 +3,7 @@ import {TypeArray} from "./types/TypeArray";
 import NestedProperty from "nested-property";
 import {Types} from "./types/Types";
 import {Field} from "./Field";
+import { TypeConditional } from "./types/TypeConditional";
 
 export class ValidateFields {
 
@@ -45,10 +46,22 @@ export class ValidateFields {
             await this.createFieldsByObjectOfMethod(pathWithPrefix, type)
         } else if (type instanceof TypeArray) {
             await this.createFieldsByArrayOfMethod(pathWithPrefix, type)
+        } else if(type instanceof TypeConditional) {
+            const newType: Types = await type.cond({
+                getBodyValue: this.getBodyValue,
+                value: this.getBodyValue(pathWithPrefix),
+                path: pathWithPrefix,
+                body: this._body
+            })
+            this.createFieldByType(newType, pathWithPrefix);
         } else {
-            const value = NestedProperty.get(this._body, pathWithPrefix);
+            const value = this.getBodyValue(pathWithPrefix);
             await this.createField(pathWithPrefix, value, type);
         }
+    }
+
+    private getBodyValue(path: string){
+        return NestedProperty.get(this._body, path);
     }
 
     private async createFields(schema: any, prefix ?: string){

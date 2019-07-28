@@ -4,6 +4,7 @@ import {TypeArray} from "./types/TypeArray";
 import {TypeNumber} from "./types/TypeNumber";
 import {ValidateFields} from "./ValidateFields";
 import {TypeDate} from "./types/typeDate";
+import { TypeConditional, IConditionalCallback } from "./types/TypeConditional";
 
 export class DataTypes {
 
@@ -31,5 +32,9 @@ export class DataTypes {
 
     static date() {
         return new TypeDate().date()
+    }
+
+    static conditional(callback: IConditionalCallback) {
+        return new TypeConditional().conditional(callback)
     }
 }
