@@ -32,4 +32,35 @@ export class TypeDate extends Types {
         return this;
     }
 
+    isBefore(date: Date){
+        this.commons.isBefore = async (field: Field) => {
+            const beforeDate = moment(date);
+            const isValid = field.shadowValue.isBefore(beforeDate)
+            if(field.hasRequirements() && !isValid){
+                return field.applyError(
+                    'date.isBefore',
+                    `A data deve ser menor que ${beforeDate.format('DD/MM/YYYY')}`,
+                    `O campo ${field.label || field.path} deve ser uma data menor que ${beforeDate.format('DD/MM/YYYY')}`
+                )
+            }
+        }
+
+        return this
+    }
+
+    isAfter(date: Date){
+        this.commons.isAfter = async (field: Field) => {
+            const beforeDate = moment(date)
+            const isValid = field.shadowValue.isAfter(beforeDate)
+            if(field.hasRequirements() && !isValid){
+                return field.applyError(
+                    'date.isAfter',
+                    `A data deve ser maior que ${beforeDate.format('DD/MM/YYYY')}`,
+                    `O campo ${field.label || field.path} deve ser uma data maior que ${beforeDate.format('DD/MM/YYYY')}`
+                )
+            }
+        }
+
+        return this
+    }
 }

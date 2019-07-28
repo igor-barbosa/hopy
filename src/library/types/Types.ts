@@ -1,10 +1,11 @@
 import {Field} from "../Field";
+import { ICustomHandler } from "../../interfaces/ICustomHandler";
 
 export class Types {
 
     public commons: any = {};
 
-    public customHandlersList: Array<any> = []
+    public customHandlersList: Array<ICustomHandler> = []
 
     public error: any = null;
 
@@ -14,7 +15,7 @@ export class Types {
         return !this.error
     }
 
-    public customHandlers(...handlers: any[]) {
+    public customHandlers(...handlers: ICustomHandler[]) {
         this.customHandlersList = handlers;
 
         return this;

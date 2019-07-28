@@ -1,16 +1,24 @@
 import {DataTypes} from "./src/library/DataTypes";
 import {Field} from "./src/library/Field";
+import moment from 'moment'
 
 (async () => {
 
-
     const body = {
-        date: '03/01/1996'
+        formations: [
+            {
+                startDate: '01/01/2000',
+                endDate: '01/01/1996'
+            }
+        ]
     };
 
 
     const schema = {
-        date: DataTypes.date()
+        formations: DataTypes.arrayOf({
+            startDate: DataTypes.date(),
+            endDate: DataTypes.date(),
+        }).min(1)
     };
 
     const response = await DataTypes.check(body, schema);
