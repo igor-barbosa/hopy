@@ -19,15 +19,15 @@ describe('Test Field Class', () => {
     it('should apply error on field instance and return the error', () => {
         const expected: any = {
             type: 'string',
-            shortMessage: 'shortMessage',
-            longMessage: 'longMessage',
+            helperText: 'shortMessage',
+            message: 'longMessage',
             context: 'context'
         }
 
         const result = field.applyError(
             expected.type, 
-            expected.shortMessage, 
-            expected.longMessage,{
+            expected.helperText, 
+            expected.message,{
                 context: expected.context
             }
         )
@@ -42,4 +42,5 @@ describe('Test Field Class', () => {
 
     //TODO: Testar se é possível setar o shadowValue
     //TODO: Testar se é possível setar os valores permitidos "allows"
+    //TODO: Testar o metodo getLabelOrPath
 });

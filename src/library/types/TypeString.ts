@@ -1,18 +1,30 @@
 import {Types} from "./Types";
 import {Field} from "../Field";
+import { DATA_TYPES_PROVIDER_MESSAGE } from "../DATA_TYPES_PROVIDER_MESSAGE";
+import { ITypeOptions } from "../../interfaces/types/ITypeOptions";
 
 export class TypeString extends Types {
 
+    public applyError(type: string, field: Field, options: any, context : any = null) {
 
-    public isString() {
+        const defaultMessage: any = DATA_TYPES_PROVIDER_MESSAGE[type]
+        const {helperText, message} = options;
+        
+        const helperTextString = (typeof helperText === "function") ? helperText(field, context) : helperText;
+        const messageString = (typeof message === "function") ? message(field, context) : message;
+
+        return field.applyError (
+            type,
+            helperTextString || defaultMessage.helperText(field, context),
+            messageString || defaultMessage.message(field, context)
+        )
+    }
+
+    public isString(options: ITypeOptions = {}) {
         this.commons.string = async (field: Field) => {
             const verify = typeof field.value as String !== "string";
             if(field.hasRequirements() && verify) {
-                return field.applyError (
-                    'string',
-                    'Campo inválido',
-                    `O campo ${field.label || field.path} é inválido`
-                )
+                return this.applyError('string', field, options)                
             }
         };
 

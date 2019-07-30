@@ -10,9 +10,7 @@ import moment from 'moment'
 
 
     const schema = {
-        name: DataTypes.conditional(async (params) => {
-            return params.value === 'Igor' ? DataTypes.isString().max(3) : DataTypes.isString().max(2)
-        })
+        name: DataTypes.isString()
     };
 
     const response = await DataTypes.check(body, schema);

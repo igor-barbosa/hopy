@@ -25,7 +25,6 @@ export class Field {
     }
 
     public hasRequirements() {
-        console.log(this.error, this.value);
         return !this.error && (this.value !== null && this.value !== undefined)
         // if(!this.hasAllowValues()){
         //     return !this.error && (this.value !== null && this.value !== undefined);
@@ -35,18 +34,21 @@ export class Field {
 
     }
 
+    public getLabelOrPath(){
+        return this.label || this.path;
+    }
 
-    public applyError(type: string, shortMessage: string, longMessage: string, options : any = {}) {
+    public applyError(type: string, helperText: string, message: string, options : any = {}) {
         const {context} = options;
         return this.error = {
             type,
-            shortMessage,
-            longMessage,
+            helperText,
+            message,
             context: context || null
         }
     }
 
-    constructor(path: string, value: string, type: Types, label : string|null = null) {
+    constructor(path: string, value: any, type: Types, label : string|null = null) {
         this.path = path;
         this.value = value;
         this.type = type;

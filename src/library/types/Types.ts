@@ -1,5 +1,6 @@
 import {Field} from "../Field";
 import { ICustomHandler } from "../../interfaces/ICustomHandler";
+import { DATA_TYPES_PROVIDER_MESSAGE } from "../DATA_TYPES_PROVIDER_MESSAGE";
 
 export class Types {
 
@@ -29,7 +30,14 @@ export class Types {
        return this;
     }
 
-
-
+    public static getProviderDefaultMessageString(type: string, field: Field, context: any = null){
+        const provider = DATA_TYPES_PROVIDER_MESSAGE[type];
+        const helperText = (typeof provider.helperText === "function") ? provider.helperText(field, context) : provider.helperText
+        const message = (typeof provider.message === "function") ? provider.message(field, context) : provider.message
+        return {
+            helperText,
+            message
+        }
+    }
 }
 
