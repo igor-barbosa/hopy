@@ -40,11 +40,12 @@ export class Field {
 
     public applyError(type: string, helperText: string, message: string, options : any = {}) {
         const {context} = options;
+
         return this.error = {
             type,
             helperText,
             message,
-            context: context || null
+            context
         }
     }
 

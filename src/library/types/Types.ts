@@ -39,5 +39,20 @@ export class Types {
             message
         }
     }
+
+    protected applyError(type: string, field: Field, options: any, context : any = null) {
+        const defaultMessage: any = DATA_TYPES_PROVIDER_MESSAGE[type]
+        const {helperText, message} = options;
+        
+        const helperTextString = (typeof helperText === "function") ? helperText(field, context) : helperText;
+        const messageString = (typeof message === "function") ? message(field, context) : message;
+
+        return field.applyError (
+            type,
+            helperTextString || defaultMessage.helperText(field, context),
+            messageString || defaultMessage.message(field, context),
+            { context }
+        )
+    }
 }
 
