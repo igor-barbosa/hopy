@@ -28,5 +28,36 @@ export const DATA_TYPES_PROVIDER_MESSAGE: any = {
     "string.regex":{
         helperText: (field: Field, context: any) => `Deve ser igual passar na regex /${context.regex}/${context.flags}`,
         message: (field: Field, context: any) => `O campo ${field.getLabelOrPath()} deve ser igual passar na regex /${context.regex}/${context.flags}`
-    }
+    },
+    /**
+     * Number
+     */
+    "number":{
+        helperText: (field: Field, context: any) => `Deve ser numérico`,
+        message: (field: Field, context: any) => `O campo ${field.getLabelOrPath()} deve ser numérico`
+    },
+    "number.safe":{
+        helperText: (field: Field, context: any) => `Deve conter entre ${context.min} e ${context.max} caracteres`,
+        message: (field: Field, context: any) => `O campo ${field.getLabelOrPath()} deve conter entre ${context.min} e ${context.max} caracteres`
+    },
+    "number.between":{
+        helperText: (field: Field, context: any) => `Deve ser um número entre ${context.min} e ${context.max}`,
+        message: (field: Field, context: any) => `O campo ${field.getLabelOrPath()} deve ser um número entre ${context.min} e ${context.max}`
+    },
+    "number.greater":{
+        helperText: (field: Field, context: any) => `Deve ser um número maior que ${context.value}`,
+        message: (field: Field, context: any) => `O campo ${field.getLabelOrPath()} deve ser um número maior que ${context.value}`
+    },
+    "number.less":{
+        helperText: (field: Field, context: any) => `Deve ser um número menor que ${context.value}`,
+        message: (field: Field, context: any) => `O campo ${field.getLabelOrPath()} deve ser um número menor que ${context.value}`
+    },
+    "number.greaterOrEqual":{
+        helperText: (field: Field, context: any) => `Deve ser um número maior ou igual a ${context.value}`,
+        message: (field: Field, context: any) => `O campo ${field.getLabelOrPath()} deve ser um número maior ou igual a ${context.value}`
+    },
+    "number.lessOrEqual":{
+        helperText: (field: Field, context: any) => `Deve ser um número menor ou igual a ${context.value}`,
+        message: (field: Field, context: any) => `O campo ${field.getLabelOrPath()} deve ser um número menor ou igual a ${context.value}`
+    },
 }

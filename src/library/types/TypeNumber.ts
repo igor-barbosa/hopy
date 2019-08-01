@@ -1,87 +1,100 @@
 import {Types} from "./Types";
 import {Field} from "../Field";
+import { ITypeOptions } from "../../interfaces/types/ITypeOptions";
 
 export class TypeNumber extends Types {
+    static SAFE = {
+        MAXIMUM: 9999999999999.99,
+        MINIMUM: -9999999999999.99
+    }
+        
 
-    public isNumber() {
-        this.commons.number = async (field: Field) => {
-            const verify = typeof field.value !== "number";
-            if(field.hasRequirements() && verify) {
-                return field.applyError (
-                    'number',
-                    'Valor deve ser numérico',
-                    `O campo ${field.label || field.path} é inválido`
-                )
+    public isNumber(options: ITypeOptions = {}) {
+        this.commons.number = async (field: Field) => {            
+            if(field.hasRequirements()) {
+                try {
+                    field.value = await this.isValidNumber(field.value)
+                } catch(e) {
+                    return this.applyError('number', field, options)  
+                }
             }
         };
         return this;
     }
 
-    public between(min: number, max: number){
-        this.commons.between = async (field: Field) => {
-            const verify = (field.value < min || field.value > max);
-            if(field.hasRequirements() && verify) {
-                return field.applyError(
-                    'number.between',
-                    `Valor deve estar entre ${min} e ${max}`,
-                    `O campo ${field.label || field.path} é inválido`
-                )
+    public isSafe(options: ITypeOptions = {}){
+        this.commons.safe = async (field: Field) => {            
+            if(field.hasRequirements()) {
+                const min = TypeNumber.SAFE.MINIMUM;
+                const max = TypeNumber.SAFE.MAXIMUM;
+                
+                if(!(field.value >=  min && field.value <= max)){
+                    return this.applyError('number.safe', field, options, {
+                        min, max
+                    })
+                }
             }
         };
         return this;
     }
 
-    public greater(value: number){
+    public between(min: number, max: number, options: ITypeOptions = {}){
+        this.commons.between = async (field: Field) => {            
+            if(field.hasRequirements()) {
+                if(!(field.value >=  min && field.value <= max)){
+                    return this.applyError('number.between', field, options, {
+                        min, max
+                    })
+                }
+            }
+        };
+        return this;
+    }
+
+    public greater(value: number, options: ITypeOptions = {}){
         this.commons.greater = async (field: Field) => {
-            const verify = (field.value <= value);
-            if(field.hasRequirements() && verify) {
-                return field.applyError(
-                    'number.greater',
-                    `Valor deve ser maior que ${value}`,
-                    `O campo ${field.label || field.path} é inválido`
-                )
+            if(field.hasRequirements()) {
+                const isValid = (field.value > value);
+                if(!isValid){
+                    return this.applyError('number.greater', field, options, {value})  
+                }
             }
         };
+
         return this;
     }
 
-    public less(value: number){
+    public less(value: number, options: ITypeOptions = {}){
         this.commons.less = async (field: Field) => {
-            const verify = (field.value >= value);
-            if(field.hasRequirements() && verify) {
-                return field.applyError(
-                    'number.less',
-                    `Valor deve ser menor que ${value}`,
-                    `O campo ${field.label || field.path} é inválido`
-                )
+            if(field.hasRequirements()) {
+                const isValid = (field.value < value);
+                if(!isValid){
+                    return this.applyError('number.less', field, options, {value})  
+                }
             }
         };
         return this;
     }
 
-    public greaterOrEqual(value: number){
+    public greaterOrEqual(value: number, options: ITypeOptions = {}){
         this.commons.greaterOrEqual = async (field: Field) => {
-            const verify = (field.value < value);
-            if(field.hasRequirements() && verify) {
-                return field.applyError(
-                    'number.greaterOrEqual',
-                    `Valor deve ser maior ou igual a ${value}`,
-                    `O campo ${field.label || field.path} é inválido`
-                )
+            if(field.hasRequirements()) {
+                const isValid = (field.value >= value);
+                if(!isValid){
+                    return this.applyError('number.greaterOrEqual', field, options, {value})  
+                }
             }
         };
         return this;
     }
 
-    public lessOrEqual(value: number){
+    public lessOrEqual(value: number, options: ITypeOptions = {}){
         this.commons.lessOrEqual = async (field: Field) => {
-            const verify = (field.value > value);
-            if(field.hasRequirements() && verify) {
-                return field.applyError(
-                    'number.lessOrEqual',
-                    `Valor deve ser menor ou igual a ${value}`,
-                    `O campo ${field.label || field.path} é inválido`
-                )
+            if(field.hasRequirements()) {
+                const isValid = (field.value <= value);
+                if(!isValid){
+                    return this.applyError('number.lessOrEqual', field, options, {value})  
+                }
             }
         };
         return this;
@@ -213,6 +226,23 @@ export class TypeNumber extends Types {
         };
 
         return this;
+    }
+
+    /**
+     * Verifica se é um número, podendo ser um número do tipo
+     * string e realiza a conversão para número.
+     * @param number 
+     */
+    private async isValidNumber(number: number) : Promise<Number|number> {        
+        return new Promise((resolve, reject) => {
+            const isNumber = typeof number === "number";
+            if(isNumber) resolve(number)
+
+            const isStringNumberValid = (typeof number === "string" && new RegExp(/^(\d+|\d+?.\d+)$/,'gi').test(number))
+            if(isStringNumberValid) return resolve(new Number(number))
+
+            reject()
+        })
     }
 
 }
