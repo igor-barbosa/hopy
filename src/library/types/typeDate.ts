@@ -4,6 +4,8 @@ import moment from 'moment';
 
 export class TypeDate extends Types {
 
+    public BASE_STRING = 'date';
+    
     public date() {
 
         this.commons.date = async (field: Field) => {

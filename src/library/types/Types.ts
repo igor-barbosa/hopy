@@ -2,15 +2,14 @@ import {Field} from "../Field";
 import { ICustomHandler } from "../../interfaces/ICustomHandler";
 import { DATA_TYPES_PROVIDER_MESSAGE } from "../DATA_TYPES_PROVIDER_MESSAGE";
 
-export class Types {
+export abstract class Types {
 
     public commons: any = {};
-
     public customHandlersList: Array<ICustomHandler> = []
-
     public error: any = null;
-
     public checkAllows: any;
+
+    public abstract BASE_STRING : string
 
     public isValid() {
         return !this.error
@@ -40,7 +39,7 @@ export class Types {
         }
     }
 
-    protected applyError(type: string, field: Field, options: any, context : any = null) {
+    public applyError(type: string, field: Field, options: any, context : any = null) {
         const defaultMessage: any = DATA_TYPES_PROVIDER_MESSAGE[type]
         const {helperText, message} = options;
         

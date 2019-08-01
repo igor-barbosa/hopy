@@ -3,6 +3,8 @@ import {Field} from "../Field";
 
 export class TypeObject extends Types {
 
+    public BASE_STRING = 'object'
+    
     public schema: any;
 
     public of(schema: any) {

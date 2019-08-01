@@ -1,14 +1,18 @@
 import {Types} from "./Types";
 import {Field} from "../Field";
 import { ITypeOptions } from "../../interfaces/types/ITypeOptions";
+import { isRequired } from "../commons";
 
 export class TypeNumber extends Types {
     static SAFE = {
         MAXIMUM: 9999999999999.99,
         MINIMUM: -9999999999999.99
     }
-        
+    
+    BASE_STRING = 'number'
 
+    public isRequired = isRequired(this)
+    
     public isNumber(options: ITypeOptions = {}) {
         this.commons.number = async (field: Field) => {            
             if(field.hasRequirements()) {
@@ -100,131 +104,88 @@ export class TypeNumber extends Types {
         return this;
     }
 
-    public notEqual(value: number){
-        this.commons.notEqual = async (field: Field) => {
-            const verify = (field.value === value);
-            if(field.hasRequirements() && verify) {
-                return field.applyError(
-                    'number.notEqual',
-                    `Valor deve ser diferente de ${value}`,
-                    `O campo ${field.label || field.path} é inválido`
-                )
+    public notEqual(value: number, options: ITypeOptions = {}){
+        this.commons.notEqual = async (field: Field) => {            
+            if(field.hasRequirements()) {
+                const isValid = (field.value !== value);
+                if(!isValid){
+                    return this.applyError('number.notEqual', field, options, {value})  
+                }
             }
         };
         return this;
     }
 
-    public equalTo(value: number){
-        this.commons.equalTo = async (field: Field) => {
-            const verify = (field.value !== value);
-            if(field.hasRequirements() && verify) {
-                return field.applyError(
-                    'number.equalTo',
-                    `Valor deve ser igual a ${value}`,
-                    `O campo ${field.label || field.path} é inválido`
-                )
+    public equalTo(value: number, options: ITypeOptions = {}){
+        this.commons.equalTo = async (field: Field) => {            
+            if(field.hasRequirements()) {
+                const isValid = (field.value === value);
+                if(!isValid){
+                    return this.applyError('number.equalTo', field, options, {value})  
+                }
             }
         };
         return this;
     }
 
-    public positive(){
-        this.commons.positive = async (field: Field) => {
-            const verify = (field.value < 0);
-            if(field.hasRequirements() && verify) {
-                return field.applyError(
-                    'number.positive',
-                    `Valor deve ser positivo`,
-                    `O campo ${field.label || field.path} é inválido`
-                )
+    public isPositive(options: ITypeOptions = {}){
+        this.commons.positive = async (field: Field) => {            
+            if(field.hasRequirements()) {
+                const isValid = (field.value >= 0);
+                if(!isValid){
+                    return this.applyError('number.positive', field, options)  
+                }
             }
         };
         return this;
     }
 
-    public negative(){
+    public isNegative(options: ITypeOptions = {}){
         this.commons.negative = async (field: Field) => {
-            const verify = (field.value >= 0);
-            if(field.hasRequirements() && verify) {
-                return field.applyError(
-                    'number.negative',
-                    `Valor deve ser negativo`,
-                    `O campo ${field.label || field.path} é inválido`
-                )
+            if(field.hasRequirements()) {
+                const isValid = (field.value < 0);
+                if(!isValid){
+                    return this.applyError('number.negative', field, options)  
+                }
             }
         };
         return this;
     }
 
-    public integer(){
-        this.commons.integer = async (field: Field) => {
-            const verify = (field.value % 1 !== 0);
-            if(field.hasRequirements() && verify) {
-                return field.applyError(
-                    'number.integer',
-                    `Valor deve ser do tipo inteiro`,
-                    `O campo ${field.label || field.path} é inválido`
-                )
+    public isInteger(options: ITypeOptions = {}){
+        this.commons.integer = async (field: Field) => {            
+            if(field.hasRequirements()) {
+                const isValid = Number.isInteger(field.value);
+                if(!isValid){
+                    return this.applyError('number.integer', field, options)  
+                }
             }
         };
         return this;
     }
 
-    public float(){
-        this.commons.float = async (field: Field) => {
-            const verify = (field.value % 1 === 0);
-            if(field.hasRequirements() && verify) {
-                return field.applyError(
-                    'number.float',
-                    `Valor deve ser decimal`,
-                    `O campo ${field.label || field.path} é inválido`
-                )
+    public isEven(options: ITypeOptions = {}){
+        this.commons.even = async (field: Field) => {            
+            if(field.hasRequirements()) {
+                const isValid = (field.value % 2 === 0);
+                if(!isValid){
+                    return this.applyError('number.even', field, options)  
+                }
             }
         };
+
         return this;
     }
 
-    public even(){
-        this.commons.even = async (field: Field) => {
-            const verify = (field.value % 2 !== 0);
-            if(field.hasRequirements() && verify) {
-                return field.applyError(
-                    'number.even',
-                    `Valor deve ser par`,
-                    `O campo ${field.label || field.path} é inválido`
-                )
+    public isOdd(options: ITypeOptions = {}){
+        this.commons.odd = async (field: Field) => {            
+            if(field.hasRequirements()) {
+                const isValid = (field.value % 2 !== 0);
+                if(!isValid){
+                    return this.applyError('number.odd', field, options)  
+                }
             }
         };
-        return this;
-    }
-
-    public odd(){
-        this.commons.odd = async (field: Field) => {
-            const verify = (field.value % 2 === 0);
-            if(field.hasRequirements() && verify) {
-                return field.applyError(
-                    'number.odd',
-                    `Valor deve ser ímpar`,
-                    `O campo ${field.label || field.path} é inválido`
-                )
-            }
-        };
-        return this;
-    }
-
-    public isRequired() {
-
-        this.commons.required = async (field: Field) => {
-            const verify = !field.value
-            if(verify) {
-                return field.applyError(
-                    'number.required',
-                    'Campo obrigatório',
-                    `O campo ${field.label || field.path} é obrigatório`
-                )
-            }
-        };
-
         return this;
     }
 

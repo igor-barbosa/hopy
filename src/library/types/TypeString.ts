@@ -5,6 +5,8 @@ import { ITypeOptions } from "../../interfaces/types/ITypeOptions";
 
 export class TypeString extends Types {
 
+    public BASE_STRING = 'string';
+    
     public isString(options: ITypeOptions = {}) {
         this.commons.string = async (field: Field) => {            
             if(field.hasRequirements()) {

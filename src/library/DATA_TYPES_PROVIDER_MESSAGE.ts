@@ -60,4 +60,36 @@ export const DATA_TYPES_PROVIDER_MESSAGE: any = {
         helperText: (field: Field, context: any) => `Deve ser um número menor ou igual a ${context.value}`,
         message: (field: Field, context: any) => `O campo ${field.getLabelOrPath()} deve ser um número menor ou igual a ${context.value}`
     },
+    "number.notEqual":{
+        helperText: (field: Field, context: any) => `Não pode ser igual a ${context.value}`,
+        message: (field: Field, context: any) => `O campo ${field.getLabelOrPath()} não pode ser igual a ${context.value}`
+    },
+    "number.equalTo":{
+        helperText: (field: Field, context: any) => `Deve ser igual a ${context.value}`,
+        message: (field: Field, context: any) => `O campo ${field.getLabelOrPath()} deve ser igual a ${context.value}`
+    },
+    "number.positive":{
+        helperText: (field: Field, context: any) => `Deve ser um número positivo`,
+        message: (field: Field, context: any) => `O campo ${field.getLabelOrPath()} deve ser um número positivo`
+    },
+    "number.negative":{
+        helperText: (field: Field, context: any) => `Deve ser um número negativo`,
+        message: (field: Field, context: any) => `O campo ${field.getLabelOrPath()} deve ser um número negativo`
+    },
+    "number.integer":{
+        helperText: (field: Field, context: any) => `Deve ser um número intedecimiro`,
+        message: (field: Field, context: any) => `O campo ${field.getLabelOrPath()} deve ser um número inteiro`
+    },
+    "number.required":{
+        helperText: (field: Field, context: any) => `Campo obrigatório`,
+        message: (field: Field, context: any) => `O campo ${field.getLabelOrPath()} é obrigatório`
+    },
+    "number.even":{
+        helperText: (field: Field, context: any) => `Deve ser um número par`,
+        message: (field: Field, context: any) => `O campo ${field.getLabelOrPath()} deve ser um número par`
+    },
+    "number.odd":{
+        helperText: (field: Field, context: any) => `Deve ser um número impar`,
+        message: (field: Field, context: any) => `O campo ${field.getLabelOrPath()} deve ser um número impar`
+    }
 }

@@ -5,6 +5,8 @@ import {Field} from "../Field";
 
 export class TypeArray extends Types {
 
+    public BASE_STRING = 'array'
+    
     public customType: any;
 
     public of(schemaOrRule: any) {

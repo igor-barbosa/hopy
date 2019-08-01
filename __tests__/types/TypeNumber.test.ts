@@ -279,8 +279,291 @@ describe('Test TypeNumber Class', () => {
                 {value}
             )
         });
+
+        describe('this.notEqual(5)', () => { 
+
+            const value = 5;
+            const providerTypeMethod = (options: ITypeOptions = {}) => new TypeNumber().isNumber().notEqual(value, options)
+            const errorType = "number.notEqual"
+            const commonName = "notEqual"
+            const validValues = [
+                6
+            ]
+            const invalidValues = [
+                5
+            ]
+    
+            testTypesIfTheRuleMethodReturnInstance(providerTypeMethod(), TypeNumber) 
+            testTypesIfTheRuleMethodCreateDynamicMethodInCommonsVariable(providerTypeMethod(), commonName)              
+            testTypeIfTheRuleMethodNotReturnErrorsWithValidValues(providerTypeMethod(), commonName, validValues)        
+            testTypesIfTheRuleMethodReturnObjectErrorWithInvalidValues(
+                providerTypeMethod(), 
+                commonName, 
+                errorType, 
+                invalidValues,
+                {value}
+            )
+            testTypesIfTheRuleMethodGenerateErrorsWithMessagePassedInArguments(
+                providerTypeMethod,
+                commonName,
+                errorType,
+                invalidValues[0],
+                {value}
+            )        
+            testTypesIfTheRuleMethodGenerateErrorsWithMessageFunctionsPassedInArguments(
+                providerTypeMethod,
+                commonName,
+                errorType,
+                invalidValues[0],
+                {value}
+            )
+        });
     })
 
+    describe('this.notEqual(5)', () => { 
+
+        const value = 5;
+        const providerTypeMethod = (options: ITypeOptions = {}) => new TypeNumber().isNumber().equalTo(value, options)
+        const errorType = "number.equalTo"
+        const commonName = "equalTo"
+        const validValues = [
+            5
+        ]
+        const invalidValues = [
+            6
+        ]
+
+        testTypesIfTheRuleMethodReturnInstance(providerTypeMethod(), TypeNumber) 
+        testTypesIfTheRuleMethodCreateDynamicMethodInCommonsVariable(providerTypeMethod(), commonName)              
+        testTypeIfTheRuleMethodNotReturnErrorsWithValidValues(providerTypeMethod(), commonName, validValues)        
+        testTypesIfTheRuleMethodReturnObjectErrorWithInvalidValues(
+            providerTypeMethod(), 
+            commonName, 
+            errorType, 
+            invalidValues,
+            {value}
+        )
+        testTypesIfTheRuleMethodGenerateErrorsWithMessagePassedInArguments(
+            providerTypeMethod,
+            commonName,
+            errorType,
+            invalidValues[0],
+            {value}
+        )        
+        testTypesIfTheRuleMethodGenerateErrorsWithMessageFunctionsPassedInArguments(
+            providerTypeMethod,
+            commonName,
+            errorType,
+            invalidValues[0],
+            {value}
+        )
+    });
+
+    describe('this.isPositive()', () => { 
+        const providerTypeMethod = (options: ITypeOptions = {}) => new TypeNumber().isNumber().isPositive(options)
+        const errorType = "number.positive"
+        const commonName = "positive"
+        const validValues = [
+            0,1
+        ]
+        const invalidValues = [
+            -1
+        ]
+
+        testTypesIfTheRuleMethodReturnInstance(providerTypeMethod(), TypeNumber) 
+        testTypesIfTheRuleMethodCreateDynamicMethodInCommonsVariable(providerTypeMethod(), commonName)              
+        testTypeIfTheRuleMethodNotReturnErrorsWithValidValues(providerTypeMethod(), commonName, validValues)        
+        testTypesIfTheRuleMethodReturnObjectErrorWithInvalidValues(
+            providerTypeMethod(), 
+            commonName, 
+            errorType, 
+            invalidValues
+        )
+        testTypesIfTheRuleMethodGenerateErrorsWithMessagePassedInArguments(
+            providerTypeMethod,
+            commonName,
+            errorType,
+            invalidValues[0]
+        )        
+        testTypesIfTheRuleMethodGenerateErrorsWithMessageFunctionsPassedInArguments(
+            providerTypeMethod,
+            commonName,
+            errorType,
+            invalidValues[0]
+        )
+    });
+
+    describe('this.isNegative()', () => {
+        const providerTypeMethod = (options: ITypeOptions = {}) => new TypeNumber().isNumber().isNegative(options)
+        const errorType = "number.negative"
+        const commonName = "negative"
+        const validValues = [
+            -1
+        ]
+        const invalidValues = [
+            0,1
+        ]
+
+        testTypesIfTheRuleMethodReturnInstance(providerTypeMethod(), TypeNumber) 
+        testTypesIfTheRuleMethodCreateDynamicMethodInCommonsVariable(providerTypeMethod(), commonName)              
+        testTypeIfTheRuleMethodNotReturnErrorsWithValidValues(providerTypeMethod(), commonName, validValues)        
+        testTypesIfTheRuleMethodReturnObjectErrorWithInvalidValues(
+            providerTypeMethod(), 
+            commonName, 
+            errorType, 
+            invalidValues
+        )
+        testTypesIfTheRuleMethodGenerateErrorsWithMessagePassedInArguments(
+            providerTypeMethod,
+            commonName,
+            errorType,
+            invalidValues[0]
+        )        
+        testTypesIfTheRuleMethodGenerateErrorsWithMessageFunctionsPassedInArguments(
+            providerTypeMethod,
+            commonName,
+            errorType,
+            invalidValues[0]
+        )
+    });
+
+    describe('this.isInteger()', () => { 
+        const providerTypeMethod = (options: ITypeOptions = {}) => new TypeNumber().isNumber().isInteger(options)
+        const errorType = "number.integer"
+        const commonName = "integer"
+        const validValues = [
+            -1,0,1
+        ]
+        const invalidValues = [
+            1.53,1.50
+        ]
+
+        testTypesIfTheRuleMethodReturnInstance(providerTypeMethod(), TypeNumber) 
+        testTypesIfTheRuleMethodCreateDynamicMethodInCommonsVariable(providerTypeMethod(), commonName)              
+        testTypeIfTheRuleMethodNotReturnErrorsWithValidValues(providerTypeMethod(), commonName, validValues)        
+        testTypesIfTheRuleMethodReturnObjectErrorWithInvalidValues(
+            providerTypeMethod(), 
+            commonName, 
+            errorType, 
+            invalidValues
+        )
+        testTypesIfTheRuleMethodGenerateErrorsWithMessagePassedInArguments(
+            providerTypeMethod,
+            commonName,
+            errorType,
+            invalidValues[0]
+        )        
+        testTypesIfTheRuleMethodGenerateErrorsWithMessageFunctionsPassedInArguments(
+            providerTypeMethod,
+            commonName,
+            errorType,
+            invalidValues[0]
+        )
+    });
+
+    describe('this.isRequired()', () => {
+        const providerTypeMethod = (options: ITypeOptions = {}) => new TypeNumber().isNumber().isRequired(options)
+        const errorType = "number.required"
+        const commonName = "required"
+        const validValues = [
+            0,1
+        ]
+        const invalidValues = [
+            undefined, null,''
+        ]
+
+        testTypesIfTheRuleMethodReturnInstance(providerTypeMethod(), TypeNumber) 
+        testTypesIfTheRuleMethodCreateDynamicMethodInCommonsVariable(providerTypeMethod(), commonName)              
+        testTypeIfTheRuleMethodNotReturnErrorsWithValidValues(providerTypeMethod(), commonName, validValues)        
+        testTypesIfTheRuleMethodReturnObjectErrorWithInvalidValues(
+            providerTypeMethod(), 
+            commonName, 
+            errorType, 
+            invalidValues
+        )
+        testTypesIfTheRuleMethodGenerateErrorsWithMessagePassedInArguments(
+            providerTypeMethod,
+            commonName,
+            errorType,
+            invalidValues[0]
+        )        
+        testTypesIfTheRuleMethodGenerateErrorsWithMessageFunctionsPassedInArguments(
+            providerTypeMethod,
+            commonName,
+            errorType,
+            invalidValues[0]
+        )
+    });
+
+    describe('this.isEven()', () => { 
+        const providerTypeMethod = (options: ITypeOptions = {}) => new TypeNumber().isNumber().isEven(options)
+        const errorType = "number.even"
+        const commonName = "even"
+        const validValues = [
+            0,2,4
+        ]
+        const invalidValues = [
+            1,3,5
+        ]
+
+        testTypesIfTheRuleMethodReturnInstance(providerTypeMethod(), TypeNumber) 
+        testTypesIfTheRuleMethodCreateDynamicMethodInCommonsVariable(providerTypeMethod(), commonName)              
+        testTypeIfTheRuleMethodNotReturnErrorsWithValidValues(providerTypeMethod(), commonName, validValues)        
+        testTypesIfTheRuleMethodReturnObjectErrorWithInvalidValues(
+            providerTypeMethod(), 
+            commonName, 
+            errorType, 
+            invalidValues
+        )
+        testTypesIfTheRuleMethodGenerateErrorsWithMessagePassedInArguments(
+            providerTypeMethod,
+            commonName,
+            errorType,
+            invalidValues[0]
+        )        
+        testTypesIfTheRuleMethodGenerateErrorsWithMessageFunctionsPassedInArguments(
+            providerTypeMethod,
+            commonName,
+            errorType,
+            invalidValues[0]
+        )
+    });
+
+    describe('this.isOdd()', () => { 
+        const providerTypeMethod = (options: ITypeOptions = {}) => new TypeNumber().isNumber().isOdd(options)
+        const errorType = "number.odd"
+        const commonName = "odd"
+        const validValues = [
+            1,3,5
+        ]
+        const invalidValues = [
+            0,2,4
+        ]
+
+        testTypesIfTheRuleMethodReturnInstance(providerTypeMethod(), TypeNumber) 
+        testTypesIfTheRuleMethodCreateDynamicMethodInCommonsVariable(providerTypeMethod(), commonName)              
+        testTypeIfTheRuleMethodNotReturnErrorsWithValidValues(providerTypeMethod(), commonName, validValues)        
+        testTypesIfTheRuleMethodReturnObjectErrorWithInvalidValues(
+            providerTypeMethod(), 
+            commonName, 
+            errorType, 
+            invalidValues
+        )
+        testTypesIfTheRuleMethodGenerateErrorsWithMessagePassedInArguments(
+            providerTypeMethod,
+            commonName,
+            errorType,
+            invalidValues[0]
+        )        
+        testTypesIfTheRuleMethodGenerateErrorsWithMessageFunctionsPassedInArguments(
+            providerTypeMethod,
+            commonName,
+            errorType,
+            invalidValues[0]
+        )
+    });
+
+    //TODO: Criar métodos de conversão número
     // describe('Test Convertion Methods', () => {  
 
     // })
