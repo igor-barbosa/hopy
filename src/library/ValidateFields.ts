@@ -24,7 +24,7 @@ export class ValidateFields {
 
     private async createFieldsByObjectOfMethod(path: string, type: TypeObject) {
         await this.validateCommonMethods(type, path);
-        if(type.isValid()) {
+        if(type.isValid() && type.specifics.object.schema) {
             await this.createFields(type.specifics.object.schema, path);
         }
     }
@@ -33,16 +33,17 @@ export class ValidateFields {
         await this.validateCommonMethods(typeArray, path);
         if(typeArray.isValid()){
             const arr: any[] = NestedProperty.get(this._body, path) || []
-            for(const key of arr.keys()){
-                await this.createFieldByType(typeArray.customType, `${path}.${key}`)
+            if(typeArray.specifics.array.schemaOrType){
+                for(const key of arr.keys()){
+                    await this.createFieldByType(typeArray.specifics.array.schemaOrType, `${path}.${key}`)
+                }
             }
-
             NestedProperty.set(this._data, path, []);
         }
     }
 
     private async createFieldByType(type: Types, pathWithPrefix: string){
-        if(type instanceof TypeObject && type.specifics.object.schema){
+        if(type instanceof TypeObject){
             await this.createFieldsByObjectOfMethod(pathWithPrefix, type)
         } else if (type instanceof TypeArray) {
             await this.createFieldsByArrayOfMethod(pathWithPrefix, type)

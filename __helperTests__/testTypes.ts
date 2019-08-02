@@ -120,3 +120,42 @@ export function testTypesShouldConvertToExpecetedValue(
         expect(input.value).toEqual(expcetedValue)
     });
 }
+
+interface IProviderType {
+    (options ?: ITypeOptions) : Types
+}
+
+export function testTypes(
+    providerType: IProviderType,
+    instanceOf: any,
+    errorType: string,
+    common: string,
+    validValues: any[],
+    invalidValues: any[],
+    context: any = null
+){
+    testTypesIfTheRuleMethodReturnInstance(providerType(), instanceOf) 
+    testTypesIfTheRuleMethodCreateDynamicMethodInCommonsVariable(providerType(), common)              
+    testTypeIfTheRuleMethodNotReturnErrorsWithValidValues(providerType(), common, validValues)        
+    testTypesIfTheRuleMethodReturnObjectErrorWithInvalidValues(
+        providerType(), 
+        common, 
+        errorType, 
+        invalidValues,
+        context
+    )
+    testTypesIfTheRuleMethodGenerateErrorsWithMessagePassedInArguments(
+        providerType,
+        common,
+        errorType,
+        invalidValues[0],
+        context
+    )        
+    testTypesIfTheRuleMethodGenerateErrorsWithMessageFunctionsPassedInArguments(
+        providerType,
+        common,
+        errorType,
+        invalidValues[0],
+        context
+    )
+}

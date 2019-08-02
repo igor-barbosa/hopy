@@ -103,8 +103,23 @@ export const DATA_TYPES_PROVIDER_MESSAGE: any = {
         helperText: (field: Field, context: any) => `Deve ser um objeto`,
         message: (field: Field, context: any) => `O campo ${field.getLabelOrPath()} deve ser um objeto`
     },
-    "object.required":{
+    /**
+     * Array
+     */
+    "array":{
+        helperText: (field: Field, context: any) => `Deve ser um array`,
+        message: (field: Field, context: any) => `O campo ${field.getLabelOrPath()} deve ser um array`
+    },
+    "array.min":{
+        helperText: (field: Field, context: any) => `Deve conter no mínimo ${context.min} itens`,
+        message: (field: Field, context: any) => `O campo ${field.getLabelOrPath()} deve conter no mínimo ${context.min} itens`
+    },
+    "array.max":{
+        helperText: (field: Field, context: any) => `Deve conter no máximo ${context.max} itens`,
+        message: (field: Field, context: any) => `O campo ${field.getLabelOrPath()} deve conter no mínimo ${context.max} itens`
+    },
+    "array.required":{
         helperText: (field: Field, context: any) => `Campo obrigatório`,
         message: (field: Field, context: any) => `O campo ${field.getLabelOrPath()} é obrigatório`
-    }
-}
+    },
+}   

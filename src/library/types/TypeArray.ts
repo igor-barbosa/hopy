@@ -1,79 +1,53 @@
 import {Types} from "./Types";
-import {IField} from "../../interfaces/types/IField";
 import {TypeObject} from "./TypeObject";
 import {Field} from "../Field";
+import { ITypeOptions } from "../../interfaces/types/ITypeOptions";
+import { ISchemaOrType } from "../../interfaces/types/ISchemaOrType";
+import { isRequired } from "../commons";
 
 export class TypeArray extends Types {
 
     public BASE_STRING = 'array'
+
+    public isRequired = isRequired(this);
     
-    public customType: any;
-
-    public of(schemaOrRule: any) {
-        this.customType = (schemaOrRule instanceof Types) ? schemaOrRule : new TypeObject().of(schemaOrRule)
-        this.commons.array = async (field: Field) => {
-            const verify = !Array.isArray(field.value);
-            if(field.hasRequirements() && verify) {
-                return field.applyError(
-                    'array',
-                    'Deve ser um array',
-                    `O campo ${field.label || field.path} deve ser um array`
-                )
+    public isArray(options: ITypeOptions = {}){
+        this.commons.array = async (field: Field) => {            
+            if(field.hasRequirements()) {
+                const isValid = Array.isArray(field.value);
+                if(!isValid){
+                    return this.applyError('array', field, options)  
+                }
             }
         };
-
         return this;
     }
 
-    public required() {
-        this.commons.required = async (field: Field) => {
-            const verify = !field.value
-            if(verify) {
-                return field.applyError(
-                    'array.required',
-                    'Campo obrigatório',
-                    `O campo ${field.label || field.path} é obrigatório`
-                )
-            }
-        };
-
+    public of(schemaOrType: ISchemaOrType) {
+        this.specifics.array.schemaOrType = (schemaOrType instanceof Types) ? schemaOrType : new TypeObject().isObject().of(schemaOrType)
         return this;
     }
 
-    public min(min: number) {
+    public min(min: number, options: ITypeOptions = {}) {
         this.commons.min = async (field: Field) => {
-            const verify = field.hasRequirements() && field.value.length < min;
-            if(verify) {
-                return field.applyError(
-                    'array.min',
-                    'Campo obrigatório',
-                    `O campo ${field.label || field.path} é obrigatório`,
-                    {
-                        context: {
-                            min
-                        }
-                    }
-                )
+            if(field.hasRequirements()) {
+                const isValid = field.value.length >= min;
+                if(!isValid){
+                    return this.applyError('array.min', field, options, {min})  
+                }
             }
         };
 
         return this;
     }
 
-    public max(max: number) {
+    public max(max: number, options: ITypeOptions = {}) {
         this.commons.max = async (field: Field) => {
-            const verify = field.hasRequirements() && field.value.length > max;
-            if(verify) {
-                return field.applyError(
-                    'array.max',
-                    'Campo obrigatório',
-                    `O campo ${field.label || field.path} é obrigatório`,
-                    {
-                        context: {
-                            max
-                        }
-                    }
-                )
+            if(field.hasRequirements()) {
+                const isValid = field.value.length <= max;
+                if(!isValid){
+                    return this.applyError('array.max', field, options, {max})  
+                }
             }
         };
 

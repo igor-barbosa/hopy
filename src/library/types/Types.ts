@@ -8,6 +8,9 @@ export abstract class Types {
     public specifics: any = {
         object:{
             schema: null
+        },
+        array: {
+            schemaOrType: null
         }
     }
 

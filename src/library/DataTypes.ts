@@ -21,7 +21,7 @@ export class DataTypes {
     }
 
     public static arrayOf(type: any){
-        return new TypeArray().of(type)
+        return new TypeArray().isArray().of(type)
     }
 
     static async check(body: any, schema: any) {
