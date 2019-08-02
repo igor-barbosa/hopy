@@ -29,6 +29,10 @@ export const DATA_TYPES_PROVIDER_MESSAGE: any = {
         helperText: (field: Field, context: any) => `Deve ser igual passar na regex /${context.regex}/${context.flags}`,
         message: (field: Field, context: any) => `O campo ${field.getLabelOrPath()} deve ser igual passar na regex /${context.regex}/${context.flags}`
     },
+    "string.required":{
+        helperText: (field: Field, context: any) => `Campo obrigatório`,
+        message: (field: Field, context: any) => `O campo ${field.getLabelOrPath()} é obrigatório`
+    },
     /**
      * Number
      */

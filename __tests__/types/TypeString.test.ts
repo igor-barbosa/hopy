@@ -265,6 +265,42 @@ describe('Test TypeString Class', () => {
                 context
             )
         });
+
+        describe('this.isRequired()', () => {    
+            const providerTypeMethod = (options: ITypeOptions = {}) => (
+                new TypeString().isString().isRequired(options)
+            )
+            const errorType = "string.required"
+            const commonName = "required"
+            const validValues = [
+                'teste'
+            ]
+            const invalidValues = [
+                undefined, null, ''
+            ]
+    
+            testTypesIfTheRuleMethodReturnInstance(providerTypeMethod(), TypeString) 
+            testTypesIfTheRuleMethodCreateDynamicMethodInCommonsVariable(providerTypeMethod(), commonName)              
+            testTypeIfTheRuleMethodNotReturnErrorsWithValidValues(providerTypeMethod(), commonName, validValues)        
+            testTypesIfTheRuleMethodReturnObjectErrorWithInvalidValues(
+                providerTypeMethod(), 
+                commonName, 
+                errorType, 
+                invalidValues
+            )
+            testTypesIfTheRuleMethodGenerateErrorsWithMessagePassedInArguments(
+                providerTypeMethod,
+                commonName,
+                errorType,
+                invalidValues[0]
+            )        
+            testTypesIfTheRuleMethodGenerateErrorsWithMessageFunctionsPassedInArguments(
+                providerTypeMethod,
+                commonName,
+                errorType,
+                invalidValues[0]
+            )
+        });
     });
 
     describe('Test Convertion Methods', () => {       

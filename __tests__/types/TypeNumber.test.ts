@@ -562,9 +562,4 @@ describe('Test TypeNumber Class', () => {
             invalidValues[0]
         )
     });
-
-    //TODO: Criar métodos de conversão número
-    // describe('Test Convertion Methods', () => {  
-
-    // })
 })

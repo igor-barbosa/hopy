@@ -2,10 +2,13 @@ import {Types} from "./Types";
 import {Field} from "../Field";
 import { DATA_TYPES_PROVIDER_MESSAGE } from "../DATA_TYPES_PROVIDER_MESSAGE";
 import { ITypeOptions } from "../../interfaces/types/ITypeOptions";
+import { isRequired } from "../commons";
 
 export class TypeString extends Types {
 
     public BASE_STRING = 'string';
+    
+    public isRequired = isRequired(this);
     
     public isString(options: ITypeOptions = {}) {
         this.commons.string = async (field: Field) => {            
