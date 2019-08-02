@@ -5,12 +5,15 @@ import moment from 'moment'
 (async () => {
 
     const body = {
-        name: 'Igor2'
+        name: 'Igor2',
+        address: {}
     };
 
 
     const schema = {
-        name: DataTypes.isString()
+        address: DataTypes.objectOf({
+            country: DataTypes.isString()
+        })
     };
 
     const response = await DataTypes.check(body, schema);

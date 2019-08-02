@@ -5,6 +5,12 @@ import { DATA_TYPES_PROVIDER_MESSAGE } from "../DATA_TYPES_PROVIDER_MESSAGE";
 export abstract class Types {
 
     public commons: any = {};
+    public specifics: any = {
+        object:{
+            schema: null
+        }
+    }
+
     public customHandlersList: Array<ICustomHandler> = []
     public error: any = null;
     public checkAllows: any;

@@ -13,7 +13,11 @@ export class DataTypes {
     }
 
     public static objectOf(schema: any){
-        return new TypeObject().of(schema);
+        return new TypeObject().isObject().of(schema);
+    }
+
+    public static object() {
+        return new TypeObject().isObject()
     }
 
     public static arrayOf(type: any){

@@ -1,25 +1,28 @@
 import {Types} from "./Types";
 import {Field} from "../Field";
+import { ITypeOptions } from "../../interfaces/types/ITypeOptions";
+import { isRequired } from "../commons";
 
 export class TypeObject extends Types {
 
     public BASE_STRING = 'object'
-    
-    public schema: any;
 
-    public of(schema: any) {
-        this.schema = schema;
+
+    public isObject(options: ITypeOptions = {}) {
         this.commons.object = async (field: Field) => {
-            const verify = typeof field.value !== "object";
-            if(field.hasRequirements() && verify) {
-                return field.applyError(
-                    'object',
-                    'Deve ser um objeto',
-                    `O campo ${field.label || field.path} deve ser um objeto`
-                )
+            if(field.hasRequirements()) {
+                const isValid = typeof field.value === "object" && !Array.isArray(field.value);
+                if(!isValid){
+                    return this.applyError('object', field, options)  
+                }
             }
         };
 
+        return this;
+    }
+
+    public of(schema: any) {
+        this.specifics.object.schema = schema;
         return this;
     }
 

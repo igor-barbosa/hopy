@@ -95,5 +95,16 @@ export const DATA_TYPES_PROVIDER_MESSAGE: any = {
     "number.odd":{
         helperText: (field: Field, context: any) => `Deve ser um número impar`,
         message: (field: Field, context: any) => `O campo ${field.getLabelOrPath()} deve ser um número impar`
+    },
+    /**
+     * Object
+     */
+    "object":{
+        helperText: (field: Field, context: any) => `Deve ser um objeto`,
+        message: (field: Field, context: any) => `O campo ${field.getLabelOrPath()} deve ser um objeto`
+    },
+    "object.required":{
+        helperText: (field: Field, context: any) => `Campo obrigatório`,
+        message: (field: Field, context: any) => `O campo ${field.getLabelOrPath()} é obrigatório`
     }
 }

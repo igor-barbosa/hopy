@@ -22,10 +22,10 @@ export class ValidateFields {
         }
     }
 
-    private async createFieldsByObjectOfMethod(path: string, typeObject: TypeObject) {
-        await this.validateCommonMethods(typeObject, path);
-        if(typeObject.isValid()) {
-            await this.createFields(typeObject.schema, path);
+    private async createFieldsByObjectOfMethod(path: string, type: TypeObject) {
+        await this.validateCommonMethods(type, path);
+        if(type.isValid()) {
+            await this.createFields(type.specifics.object.schema, path);
         }
     }
 
@@ -42,7 +42,7 @@ export class ValidateFields {
     }
 
     private async createFieldByType(type: Types, pathWithPrefix: string){
-        if(type instanceof TypeObject){
+        if(type instanceof TypeObject && type.specifics.object.schema){
             await this.createFieldsByObjectOfMethod(pathWithPrefix, type)
         } else if (type instanceof TypeArray) {
             await this.createFieldsByArrayOfMethod(pathWithPrefix, type)
@@ -71,8 +71,8 @@ export class ValidateFields {
         }
     }
 
-    private makeField(path: string){
-        return new Field(path, NestedProperty.get(this._body, path), new Types());
+    private makeField(path: string, type: Types){
+        return new Field(path, NestedProperty.get(this._body, path), type);
     }
 
     private setError(path: string, error: any) {
@@ -83,7 +83,7 @@ export class ValidateFields {
     }
 
     private async validateCommonMethods(type: Types, path: string) {
-        const field: Field = (type instanceof TypeObject || type instanceof TypeArray) ? this.makeField(path) : this._fields[path];
+        const field: Field = (type instanceof TypeObject || type instanceof TypeArray) ? this.makeField(path, type) : this._fields[path];
         if(!!type.checkAllows) type.checkAllows(field);
         for(const commonKey of Object.keys(type.commons)) {
             const validationFunction = type.commons[commonKey];
