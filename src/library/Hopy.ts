@@ -13,7 +13,7 @@ export class Hopy {
         return new TypeString().isString(options)
     }
 
-    public get string(){
+    public static get string(){
         return new TypeString().isString()
     }
 
