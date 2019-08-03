@@ -4,6 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "dependencies": {
+    "barrelsby": "^2.1.1",
     "moment": "^2.24.0",
     "nested-property": "^1.0.1",
     "typescript": "^3.5.3"
@@ -13,5 +14,11 @@
     "@types/node": "^12.6.8",
     "jest": "^24.8.0",
     "ts-jest": "^24.0.2"
-  }
+  },
+  "scripts": {
+    "test": "jest",
+    "export": "barrelsby -d src",
+    "build": "tsc"
+  },
+  "typings": "lib/index.d.ts"
 }

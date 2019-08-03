@@ -34,9 +34,9 @@ export class ValidateFields {
         if(typeArray.isValid()){
             const arr: any[] = NestedProperty.get(this._body, path) || []
             if(typeArray.specifics.array.schemaOrType){
-                for(const key of arr.keys()){
+                await Promise.all(arr.map(async(item, key) => {
                     await this.createFieldByType(typeArray.specifics.array.schemaOrType, `${path}.${key}`)
-                }
+                }));
             }
             NestedProperty.set(this._data, path, []);
         }
