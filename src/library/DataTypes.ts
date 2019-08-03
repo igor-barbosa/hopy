@@ -5,40 +5,65 @@ import {TypeNumber} from "./types/TypeNumber";
 import {ValidateFields} from "./ValidateFields";
 import {TypeDate} from "./types/typeDate";
 import { TypeConditional, IConditionalCallback } from "./types/TypeConditional";
+import { ITypeOptions, IDateOptions } from "../interfaces/types/ITypeOptions";
 
 export class DataTypes {
 
-    public static isString(){
+    public static isString(options: ITypeOptions = {}){
+        return new TypeString().isString(options)
+    }
+
+    public get string(){
         return new TypeString().isString()
     }
 
-    public static objectOf(schema: any){
-        return new TypeObject().isObject().of(schema);
+    public static objectOf(schema: any, options: ITypeOptions = {}){
+        return new TypeObject().isObject(options).of(schema);
     }
 
-    public static object() {
+    public static isObject(options: ITypeOptions = {}) {
+        return new TypeObject().isObject(options)
+    }
+
+    public static get object(){
         return new TypeObject().isObject()
     }
 
-    public static arrayOf(type: any){
-        return new TypeArray().isArray().of(type)
+    public static arrayOf(type: any, options: ITypeOptions = {}){
+        return new TypeArray().isArray(options).of(type)
     }
 
-    static async check(body: any, schema: any) {
+    public static isArray(options: ITypeOptions = {}){
+        return new TypeArray().isArray(options)
+    }
+
+    public static get array(){
+        return new TypeArray().isArray()
+    }
+
+    public static isNumber(options: ITypeOptions = {}) {
+        return new TypeNumber().isNumber(options)
+    }
+
+    public static get number() {
+        return new TypeNumber().isNumber()
+    }
+
+    public static isDate(options: IDateOptions = {}){
+        return new TypeDate().isDate(options)
+    }
+
+    public static get date(){
+        return new TypeDate().isDate();
+    }
+
+    public static async check(body: any, schema: any) {
         const vld: ValidateFields = await new ValidateFields().init(body, schema);
         await vld.validate();
         return vld.getResponse();
     }
 
-    static isNumber() {
-        return new TypeNumber().isNumber()
-    }
-
-    static date() {
-        return new TypeDate().date()
-    }
-
-    static conditional(callback: IConditionalCallback) {
+    public static conditional(callback: IConditionalCallback) {
         return new TypeConditional().conditional(callback)
     }
 }

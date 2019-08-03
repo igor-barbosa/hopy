@@ -122,6 +122,9 @@ export const DATA_TYPES_PROVIDER_MESSAGE: any = {
         helperText: (field: Field, context: any) => `Campo obrigatório`,
         message: (field: Field, context: any) => `O campo ${field.getLabelOrPath()} é obrigatório`
     },
+    /**
+     * DATE
+     */
     "date":{
         helperText: (field: Field, context: any) => `Data inválida`,
         message: (field: Field, context: any) => `O campo ${field.getLabelOrPath()} deve ser uma data válida.`

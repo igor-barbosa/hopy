@@ -5,6 +5,7 @@ import { DATA_TYPES_PROVIDER_MESSAGE } from "../DATA_TYPES_PROVIDER_MESSAGE";
 export abstract class Types {
 
     public commons: any[] = [];
+    
     public specifics: any = {
         object:{
             schema: null
@@ -19,6 +20,7 @@ export abstract class Types {
     }
 
     public error: any = null;
+
     public abstract BASE_STRING : string
 
     public isValid() {
