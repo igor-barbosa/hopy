@@ -18,7 +18,7 @@
   },
   "scripts": {
     "test": "jest",
-    "export": "barrelsby -d src",
+    "export": "rm -rf src/index.ts && barrelsby -d src",
     "build": "yarn export && tsc"
   }
 }
