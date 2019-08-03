@@ -1,5 +1,5 @@
 {
-  "name": "datatypes-validation",
+  "name": "hopy",
   "version": "0.0.1",
   "main": "index.js",
   "license": "MIT",
@@ -18,7 +18,7 @@
   "scripts": {
     "test": "jest",
     "export": "barrelsby -d src",
-    "build": "tsc"
+    "build": "yarn export && tsc"
   },
   "typings": "lib/index.d.ts"
 }

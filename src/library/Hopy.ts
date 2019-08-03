@@ -7,7 +7,7 @@ import {TypeDate} from "./types/typeDate";
 import { TypeConditional, IConditionalCallback } from "./types/TypeConditional";
 import { ITypeOptions, IDateOptions } from "../interfaces/types/ITypeOptions";
 
-export class DataTypes {
+export class Hopy {
 
     public static isString(options: ITypeOptions = {}){
         return new TypeString().isString(options)
