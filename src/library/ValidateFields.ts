@@ -48,7 +48,7 @@ export class ValidateFields {
         } else if (type instanceof TypeArray) {
             await this.createFieldsByArrayOfMethod(pathWithPrefix, type)
         } else if(type instanceof TypeConditional) {
-            const newType: Types = await type.cond({
+            const newType: Types = await type.specifics.conditional({
                 getBodyValue: this.getBodyValue,
                 value: this.getBodyValue(pathWithPrefix),
                 path: pathWithPrefix,
@@ -85,20 +85,27 @@ export class ValidateFields {
 
     private async validateCommonMethods(type: Types, path: string) {
         const field: Field = (type instanceof TypeObject || type instanceof TypeArray) ? this.makeField(path, type) : this._fields[path];
-        if(!!type.checkAllows) type.checkAllows(field);
-        for(const commonKey of Object.keys(type.commons)) {
-            const validationFunction = type.commons[commonKey];
+        if(type.specifics.required){
+            type.specifics.required(field)
+        }
+
+        for(const common of type.commons) {
+            const validationFunction = common.method;
             const error = await validationFunction(field);
             if(error) {
                 this.setError(path, error);
             }
         }
 
-        for(const customHandler of type.customHandlersList){
+        for(const customHandler of type.specifics.customHandler){
             const error = await customHandler(field, this._fields);
             if(error) {
                 this.setError(path, error);
             }
+        }
+
+        if(type.specifics.defaultValue !== undefined){
+            await type.specifics.defaultValue(field)
         }
 
         if(!this._errors[path]) {

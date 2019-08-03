@@ -1,7 +1,7 @@
 import {Types} from "./Types";
 import {Field} from "../Field";
 import { ITypeOptions } from "../../interfaces/types/ITypeOptions";
-import { isRequired } from "../commons";
+import { isRequired, custom, defaultValue } from "../commons";
 
 export class TypeNumber extends Types {
     static SAFE = {
@@ -11,10 +11,12 @@ export class TypeNumber extends Types {
     
     BASE_STRING = 'number'
 
-    public isRequired = isRequired(this)
+    public isRequired = isRequired(this);
+    public defaultValue = defaultValue(this)
+    public custom = custom(this)
     
     public isNumber(options: ITypeOptions = {}) {
-        this.commons.number = async (field: Field) => {            
+        return this.addCommon('number', async (field: Field) => {            
             if(field.hasRequirements()) {
                 try {
                     field.value = await this.isValidNumber(field.value)
@@ -22,12 +24,11 @@ export class TypeNumber extends Types {
                     return this.applyError('number', field, options)  
                 }
             }
-        };
-        return this;
+        })
     }
 
     public isSafe(options: ITypeOptions = {}){
-        this.commons.safe = async (field: Field) => {            
+        return this.addCommon('safe', async (field: Field) => {            
             if(field.hasRequirements()) {
                 const min = TypeNumber.SAFE.MINIMUM;
                 const max = TypeNumber.SAFE.MAXIMUM;
@@ -38,12 +39,11 @@ export class TypeNumber extends Types {
                     })
                 }
             }
-        };
-        return this;
+        })
     }
 
     public between(min: number, max: number, options: ITypeOptions = {}){
-        this.commons.between = async (field: Field) => {            
+        return this.addCommon('between', async (field: Field) => {            
             if(field.hasRequirements()) {
                 if(!(field.value >=  min && field.value <= max)){
                     return this.applyError('number.between', field, options, {
@@ -51,142 +51,128 @@ export class TypeNumber extends Types {
                     })
                 }
             }
-        };
-        return this;
+        });
     }
 
     public greater(value: number, options: ITypeOptions = {}){
-        this.commons.greater = async (field: Field) => {
+        return this.addCommon('greater', async (field: Field) => {
             if(field.hasRequirements()) {
                 const isValid = (field.value > value);
                 if(!isValid){
                     return this.applyError('number.greater', field, options, {value})  
                 }
             }
-        };
-
-        return this;
+        });
     }
 
     public less(value: number, options: ITypeOptions = {}){
-        this.commons.less = async (field: Field) => {
+        return this.addCommon('less', async (field: Field) => {
             if(field.hasRequirements()) {
                 const isValid = (field.value < value);
                 if(!isValid){
                     return this.applyError('number.less', field, options, {value})  
                 }
             }
-        };
-        return this;
+        });
     }
 
     public greaterOrEqual(value: number, options: ITypeOptions = {}){
-        this.commons.greaterOrEqual = async (field: Field) => {
+        return this.addCommon('greaterOrEqual',  async (field: Field) => {
             if(field.hasRequirements()) {
                 const isValid = (field.value >= value);
                 if(!isValid){
                     return this.applyError('number.greaterOrEqual', field, options, {value})  
                 }
             }
-        };
-        return this;
+        });
     }
 
     public lessOrEqual(value: number, options: ITypeOptions = {}){
-        this.commons.lessOrEqual = async (field: Field) => {
+        return this.addCommon('lessOrEqual', async (field: Field) => {
             if(field.hasRequirements()) {
                 const isValid = (field.value <= value);
                 if(!isValid){
                     return this.applyError('number.lessOrEqual', field, options, {value})  
                 }
             }
-        };
-        return this;
+        });
     }
 
     public notEqual(value: number, options: ITypeOptions = {}){
-        this.commons.notEqual = async (field: Field) => {            
+        return this.addCommon('notEqual', async (field: Field) => {            
             if(field.hasRequirements()) {
                 const isValid = (field.value !== value);
                 if(!isValid){
                     return this.applyError('number.notEqual', field, options, {value})  
                 }
             }
-        };
-        return this;
+        });
     }
 
     public equalTo(value: number, options: ITypeOptions = {}){
-        this.commons.equalTo = async (field: Field) => {            
+        return this.addCommon('equalTo', async (field: Field) => {            
             if(field.hasRequirements()) {
                 const isValid = (field.value === value);
                 if(!isValid){
                     return this.applyError('number.equalTo', field, options, {value})  
                 }
             }
-        };
-        return this;
+        });
     }
 
     public isPositive(options: ITypeOptions = {}){
-        this.commons.positive = async (field: Field) => {            
+        return this.addCommon('positive', async (field: Field) => {            
             if(field.hasRequirements()) {
                 const isValid = (field.value >= 0);
                 if(!isValid){
                     return this.applyError('number.positive', field, options)  
                 }
             }
-        };
-        return this;
+        });
     }
 
     public isNegative(options: ITypeOptions = {}){
-        this.commons.negative = async (field: Field) => {
+        return this.addCommon('negative', async (field: Field) => {
             if(field.hasRequirements()) {
                 const isValid = (field.value < 0);
                 if(!isValid){
                     return this.applyError('number.negative', field, options)  
                 }
             }
-        };
-        return this;
+        });
     }
 
     public isInteger(options: ITypeOptions = {}){
-        this.commons.integer = async (field: Field) => {            
+        return this.addCommon('integer', async (field: Field) => {            
             if(field.hasRequirements()) {
                 const isValid = Number.isInteger(field.value);
                 if(!isValid){
                     return this.applyError('number.integer', field, options)  
                 }
             }
-        };
-        return this;
+        });
     }
 
     public isEven(options: ITypeOptions = {}){
-        this.commons.even = async (field: Field) => {            
+        return this.addCommon('even', async (field: Field) => {            
             if(field.hasRequirements()) {
                 const isValid = (field.value % 2 === 0);
                 if(!isValid){
                     return this.applyError('number.even', field, options)  
                 }
             }
-        };
-
-        return this;
+        });
     }
 
     public isOdd(options: ITypeOptions = {}){
-        this.commons.odd = async (field: Field) => {            
+        return this.addCommon('odd', async (field: Field) => {            
             if(field.hasRequirements()) {
                 const isValid = (field.value % 2 !== 0);
                 if(!isValid){
                     return this.applyError('number.odd', field, options)  
                 }
             }
-        };
-        return this;
+        });
     }
 
     /**

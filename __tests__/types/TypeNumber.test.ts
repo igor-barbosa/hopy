@@ -461,40 +461,6 @@ describe('Test TypeNumber Class', () => {
         )
     });
 
-    describe('this.isRequired()', () => {
-        const providerTypeMethod = (options: ITypeOptions = {}) => new TypeNumber().isNumber().isRequired(options)
-        const errorType = "number.required"
-        const commonName = "required"
-        const validValues = [
-            0,1
-        ]
-        const invalidValues = [
-            undefined, null,''
-        ]
-
-        testTypesIfTheRuleMethodReturnInstance(providerTypeMethod(), TypeNumber) 
-        testTypesIfTheRuleMethodCreateDynamicMethodInCommonsVariable(providerTypeMethod(), commonName)              
-        testTypeIfTheRuleMethodNotReturnErrorsWithValidValues(providerTypeMethod(), commonName, validValues)        
-        testTypesIfTheRuleMethodReturnObjectErrorWithInvalidValues(
-            providerTypeMethod(), 
-            commonName, 
-            errorType, 
-            invalidValues
-        )
-        testTypesIfTheRuleMethodGenerateErrorsWithMessagePassedInArguments(
-            providerTypeMethod,
-            commonName,
-            errorType,
-            invalidValues[0]
-        )        
-        testTypesIfTheRuleMethodGenerateErrorsWithMessageFunctionsPassedInArguments(
-            providerTypeMethod,
-            commonName,
-            errorType,
-            invalidValues[0]
-        )
-    });
-
     describe('this.isEven()', () => { 
         const providerTypeMethod = (options: ITypeOptions = {}) => new TypeNumber().isNumber().isEven(options)
         const errorType = "number.even"

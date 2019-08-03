@@ -16,9 +16,9 @@ export function testTypesIfTheRuleMethodReturnInstance(type: Types, instanceOfTy
     });
 }
 
-export function testTypesIfTheRuleMethodCreateDynamicMethodInCommonsVariable(type: Types, method: string){
-    it(`should create the method ${method} in commons variable of instance`, () => {
-        expect(type.commons).toHaveProperty(method)
+export function testTypesIfTheRuleMethodCreateDynamicMethodInCommonsVariable(type: Types, common: string){
+    it(`should create the method ${common} in commons variable of instance`, () => {
+        expect(type.hasCommon(common)).toEqual(true)
     });
 }
 
@@ -26,7 +26,8 @@ export function testTypeIfTheRuleMethodNotReturnErrorsWithValidValues(type: Type
     for(const value of values){
         it(`should return undefined because the value "${value}" is valid`, async () => {
             const input = new Field('field',value,type)
-            const result: any = await type.commons[common](input);            
+            const all = await Promise.all(type.commons.map(fn => fn.method(input)));
+            const result = all.filter(item => item)[0] || undefined;            
             expect(result).toEqual(undefined);
         });
     }    
@@ -43,7 +44,8 @@ export function testTypesIfTheRuleMethodReturnObjectErrorWithInvalidValues(
         const textValue = (Array.isArray(value)) ? '[Array]' : value;
         it(`should return object error because the value "${textValue}" is invalid`, async () => {
             const input = new Field('field',value,type)
-            const result: any = await type.commons[common](input); 
+            const all = await Promise.all(type.commons.map(fn => fn.method(input)));
+            const result = all.filter(item => item)[0] || undefined;    
             const errorResonse = {
                 type: errorType,
                 ...Types.getProviderDefaultMessageString(errorType, input, context),
@@ -69,7 +71,8 @@ export function testTypesIfTheRuleMethodGenerateErrorsWithMessagePassedInArgumen
         }
         const types = typesFn(options)
         const input = new Field('field',value,types)
-        const result: any = await types.commons[common](input); 
+        const all = await Promise.all(types.commons.map(fn => fn.method(input)));
+        const result = all.filter(item => item)[0] || undefined; 
         const errorResonse = {
             type: errorType,
             ...options,
@@ -95,7 +98,8 @@ export function testTypesIfTheRuleMethodGenerateErrorsWithMessageFunctionsPassed
         }
         const types = typesFn(options)
         const input = new Field('field',value,types)
-        const result: any = await types.commons[common](input); 
+        const all = await Promise.all(types.commons.map(fn => fn.method(input)));
+        const result = all.filter(item => item)[0] || undefined;     
         const errorResonse = {
             type: errorType,
             helperText: options.helperText(),
@@ -116,7 +120,7 @@ export function testTypesShouldConvertToExpecetedValue(
     expcetedValue: any ){
     it(testDescription, async () => {
         const input = new Field('field',value,types)
-        await types.commons[common](input)
+        await types.getCommon(common).method(input)
         expect(input.value).toEqual(expcetedValue)
     });
 }

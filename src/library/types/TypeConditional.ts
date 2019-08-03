@@ -12,11 +12,9 @@ export interface IConditionalCallback {
 export class TypeConditional extends Types {
 
     public BASE_STRING = 'conditional'
-    
-    cond: any;
-    
+ 
     conditional(callback: IConditionalCallback){
-        this.cond = callback;
+        this.specifics.conditional = callback;
         return this;
     }
 }

@@ -1,24 +1,25 @@
 import {Types} from "./Types";
 import {Field} from "../Field";
 import { ITypeOptions } from "../../interfaces/types/ITypeOptions";
-import { isRequired } from "../commons";
+import { defaultValue, custom } from "../commons";
+
 
 export class TypeObject extends Types {
 
     public BASE_STRING = 'object'
 
+    public defaultValue = defaultValue(this)
+    public custom = custom(this)
 
     public isObject(options: ITypeOptions = {}) {
-        this.commons.object = async (field: Field) => {
+        return this.addCommon('object', async (field: Field) => {
             if(field.hasRequirements()) {
                 const isValid = typeof field.value === "object" && !Array.isArray(field.value);
                 if(!isValid){
                     return this.applyError('object', field, options)  
                 }
             }
-        };
-
-        return this;
+        })
     }
 
     public of(schema: any) {

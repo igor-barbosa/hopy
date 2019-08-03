@@ -4,3 +4,7 @@ export interface ITypeOptions {
     helperText ?: IFieldMessage,
     message ?: IFieldMessage
 }
+
+export interface IDateOptions extends ITypeOptions {
+    format ?: string,
+}

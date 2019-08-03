@@ -4,38 +4,25 @@ import { DATA_TYPES_PROVIDER_MESSAGE } from "../DATA_TYPES_PROVIDER_MESSAGE";
 
 export abstract class Types {
 
-    public commons: any = {};
+    public commons: any[] = [];
     public specifics: any = {
         object:{
             schema: null
         },
         array: {
             schemaOrType: null
-        }
+        },
+        required: null,
+        conditional: null,
+        customHandlers: [],
+        defaultValue: undefined
     }
 
-    public customHandlersList: Array<ICustomHandler> = []
     public error: any = null;
-    public checkAllows: any;
-
     public abstract BASE_STRING : string
 
     public isValid() {
         return !this.error
-    }
-
-    public customHandlers(...handlers: ICustomHandler[]) {
-        this.customHandlersList = handlers;
-
-        return this;
-    }
-
-    public allow(...values: any[]) {
-       this.checkAllows = (field: Field) => {
-           field.allows = values
-       }
-
-       return this;
     }
 
     public static getProviderDefaultMessageString(type: string, field: Field, context: any = null){
@@ -61,6 +48,23 @@ export abstract class Types {
             messageString || defaultMessage.message(field, context),
             { context }
         )
+    }
+
+    public addCommon(common: string, method: (field: Field) => Promise<any>){
+        this.commons.push({
+            common,
+            method
+        });
+
+        return this;
+    }
+
+    public hasCommon(common: string){
+        return (this.commons.filter(item => item.common === common).length > 0)
+    }
+
+    public getCommon(common: string){
+        return this.commons.filter(item => item.common === common)[0]
     }
 }
 
