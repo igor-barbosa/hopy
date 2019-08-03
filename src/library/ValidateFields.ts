@@ -97,7 +97,7 @@ export class ValidateFields {
             }
         }
 
-        for(const customHandler of type.specifics.customHandler){
+        for(const customHandler of type.specifics.customHandlers){
             const error = await customHandler(field, this._fields);
             if(error) {
                 this.setError(path, error);
@@ -132,7 +132,7 @@ export class ValidateFields {
 
     public getResponse() {
         return {
-            errors: this._errors,
+            errors: (Object.keys(this._errors).length > 0) ? this._errors : false,
             data: this._data
         }
     }
