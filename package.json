@@ -1,7 +1,8 @@
 {
   "name": "hopy",
   "version": "0.0.1",
-  "main": "index.js",
+  "typings": "lib/index.d.ts",
+  "main": "lib/index.js",
   "license": "MIT",
   "dependencies": {
     "barrelsby": "^2.1.1",
@@ -19,6 +20,5 @@
     "test": "jest",
     "export": "barrelsby -d src",
     "build": "yarn export && tsc"
-  },
-  "typings": "lib/index.d.ts"
+  }
 }
