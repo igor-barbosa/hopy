@@ -86,7 +86,8 @@ export class ValidateFields {
     private async validateCommonMethods(type: Types, path: string) {
         const field: Field = (type instanceof TypeObject || type instanceof TypeArray) ? this.makeField(path, type) : this._fields[path];
         if(type.specifics.required){
-            type.specifics.required(field)
+            const error = await type.specifics.required(field)
+            if(error) this.setError(path, error)
         }
 
         for(const common of type.commons) {
@@ -111,7 +112,6 @@ export class ValidateFields {
         if(!this._errors[path]) {
             NestedProperty.set(this._data, path, field.value);
         }
-
 
     }
 
