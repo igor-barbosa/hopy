@@ -8,8 +8,8 @@ export class TypeObject extends Types {
 
     public BASE_STRING = 'object'
 
-    public defaultValue = defaultValue(this)
-    public custom = custom(this)
+    public defaultValue = defaultValue<TypeObject>(this)
+    public custom = custom<TypeObject>(this)
 
     public isObject(options: ITypeOptions = {}) {
         return this.addCommon('object', async (field: Field) => {

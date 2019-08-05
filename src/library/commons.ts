@@ -5,8 +5,8 @@ import { type } from "os";
 import { ICustomHandler } from "../interfaces/ICustomHandler";
 
 
-export function isRequired(type: Types) {
-    return (options: ITypeOptions = {}) => {
+export function isRequired<T extends Types>(type: Types) {
+    return (options: ITypeOptions = {}) : T => {
         type.specifics.required = async (field: Field) => {
             const value = field.value;
             if(value === undefined || value === null || (typeof value === "string" && value.trim() === "")) {
@@ -14,22 +14,22 @@ export function isRequired(type: Types) {
             }
         }
 
-        return type;
+        return <T>type;
     }        
 }
 
-export function defaultValue(type: Types){
-    return (value: any) => {
+export function defaultValue<T extends Types>(type: Types){
+    return (value: any) : T => {
         type.specifics.defaultValue = async (field: Field) => {
             field.value = value
         } 
-        return type;
+        return <T>type;
     }
 }
 
-export function custom(type: Types){
-    return (...handlers: ICustomHandler[]) => {
+export function custom<T extends Types>(type: Types){
+    return (...handlers: ICustomHandler[]) : T => {
         type.specifics.customHandlers = handlers;
-        return type;
+        return <T>type;
     }
 }

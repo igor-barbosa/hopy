@@ -6,6 +6,7 @@ import {ValidateFields} from "./ValidateFields";
 import {TypeDate} from "./types/typeDate";
 import { TypeConditional, IConditionalCallback } from "./types/TypeConditional";
 import { ITypeOptions, IDateOptions } from "../interfaces/types/ITypeOptions";
+import { TypeAny } from "./types/TypeAny";
 
 export class Hopy {
 
@@ -65,5 +66,9 @@ export class Hopy {
 
     public static conditional(callback: IConditionalCallback) {
         return new TypeConditional().conditional(callback)
+    }
+
+    public static get any(){
+        return new TypeAny().any()
     }
 }

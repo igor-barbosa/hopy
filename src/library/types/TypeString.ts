@@ -7,9 +7,9 @@ export class TypeString extends Types {
 
     public BASE_STRING = 'string';
     
-    public isRequired = isRequired(this);
-    public defaultValue = defaultValue(this)
-    public custom = custom(this)
+    public isRequired = isRequired<TypeString>(this);
+    public defaultValue = defaultValue<TypeString>(this)
+    public custom = custom<TypeString>(this)
     
     public isString(options: ITypeOptions = {}) {
         return this.addCommon('string', async (field) => {

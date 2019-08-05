@@ -1,9 +1,11 @@
 import {Field} from "../Field";
 import { ICustomHandler } from "../../interfaces/ICustomHandler";
 import { DATA_TYPES_PROVIDER_MESSAGE } from "../DATA_TYPES_PROVIDER_MESSAGE";
+import NestedProperty from "nested-property";
 
 export abstract class Types {
 
+    public body: any;
     public commons: any[] = [];
     
     public specifics: any = {
@@ -67,6 +69,14 @@ export abstract class Types {
 
     public getCommon(common: string){
         return this.commons.filter(item => item.common === common)[0]
+    }
+
+    public setBody(body: any){
+        this.body = body;
+    }
+
+    public getBodyValue(path: string){
+        return NestedProperty.get(this.body, path);
     }
 }
 

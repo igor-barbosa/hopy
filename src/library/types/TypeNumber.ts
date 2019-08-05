@@ -11,9 +11,9 @@ export class TypeNumber extends Types {
     
     BASE_STRING = 'number'
 
-    public isRequired = isRequired(this);
-    public defaultValue = defaultValue(this)
-    public custom = custom(this)
+    public isRequired = isRequired<TypeNumber>(this);
+    public defaultValue = defaultValue<TypeNumber>(this)
+    public custom = custom<TypeNumber>(this)
     
     public isNumber(options: ITypeOptions = {}) {
         return this.addCommon('number', async (field: Field) => {            

@@ -12,6 +12,7 @@ export * from "./library/Field";
 export * from "./library/Hopy";
 export * from "./library/ValidateFields";
 export * from "./library/commons";
+export * from "./library/types/TypeAny";
 export * from "./library/types/TypeArray";
 export * from "./library/types/TypeConditional";
 export * from "./library/types/TypeNumber";

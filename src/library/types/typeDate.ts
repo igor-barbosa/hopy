@@ -10,9 +10,9 @@ export class TypeDate extends Types {
     
     public static FORMAT_DEFAULT = 'DD/MM/YYYY';
     
-    public isRequired = isRequired(this);
-    public defaultValue = defaultValue(this)
-    public custom = custom(this)
+    public isRequired = isRequired<TypeDate>(this);
+    public defaultValue = defaultValue<TypeDate>(this)
+    public custom = custom<TypeDate>(this)
     
     public isDate(options: IDateOptions = {}) {
         return this.addCommon('date', async (field: Field) => {

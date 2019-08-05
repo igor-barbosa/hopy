@@ -9,9 +9,9 @@ export class TypeArray extends Types {
 
     public BASE_STRING = 'array'
 
-    public isRequired = isRequired(this);
-    public defaultValue = defaultValue(this)
-    public custom = custom(this)
+    public isRequired = isRequired<TypeArray>(this);
+    public defaultValue = defaultValue<TypeArray>(this)
+    public custom = custom<TypeArray>(this)
     
     public isArray(options: ITypeOptions = {}){
         return this.addCommon('array', async (field: Field) => {            

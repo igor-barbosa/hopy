@@ -43,6 +43,7 @@ export class ValidateFields {
     }
 
     private async createFieldByType(type: Types, pathWithPrefix: string){
+        type.setBody(this._body);
         if(type instanceof TypeObject){
             await this.createFieldsByObjectOfMethod(pathWithPrefix, type)
         } else if (type instanceof TypeArray) {
