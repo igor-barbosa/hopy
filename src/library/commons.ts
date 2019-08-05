@@ -21,7 +21,9 @@ export function isRequired<T extends Types>(type: Types) {
 export function defaultValue<T extends Types>(type: Types){
     return (value: any) : T => {
         type.specifics.defaultValue = async (field: Field) => {
-            field.value = value
+            if(field.value === undefined) {
+                field.value = value
+            }
         } 
         return <T>type;
     }
