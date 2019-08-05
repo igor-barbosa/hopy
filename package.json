@@ -1,6 +1,6 @@
 {
   "name": "hopy",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "typings": "lib/index.d.ts",
   "main": "lib/index.js",
   "license": "MIT",
