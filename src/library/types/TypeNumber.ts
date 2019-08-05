@@ -27,6 +27,32 @@ export class TypeNumber extends Types {
         })
     }
 
+    public max(max: number, options: ITypeOptions = {}) {
+        return this.addCommon('max', async (field: Field) => {            
+            if(field.hasRequirements()) {
+                const isValid = field.value <= max;
+                if(!isValid){
+                    return this.applyError('number.max', field, options, {
+                        max
+                    })  
+                }
+            }
+        })
+    }
+
+    public min(min: number, options: ITypeOptions = {}) {
+        return this.addCommon('min', async (field: Field) => {            
+            if(field.hasRequirements()) {
+                const isValid = field.value >= min;
+                if(!isValid){
+                    return this.applyError('number.min', field, options, {
+                        min
+                    })  
+                }
+            }
+        })
+    }
+
     public isSafe(options: ITypeOptions = {}){
         return this.addCommon('safe', async (field: Field) => {            
             if(field.hasRequirements()) {

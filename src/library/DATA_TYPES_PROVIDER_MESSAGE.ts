@@ -56,14 +56,6 @@ export const DATA_TYPES_PROVIDER_MESSAGE: any = {
         helperText: (field: Field, context: any) => `Deve ser um número menor que ${context.value}`,
         message: (field: Field, context: any) => `O campo ${field.getLabelOrPath()} deve ser um número menor que ${context.value}`
     },
-    "number.greaterOrEqual":{
-        helperText: (field: Field, context: any) => `Deve ser um número maior ou igual a ${context.value}`,
-        message: (field: Field, context: any) => `O campo ${field.getLabelOrPath()} deve ser um número maior ou igual a ${context.value}`
-    },
-    "number.lessOrEqual":{
-        helperText: (field: Field, context: any) => `Deve ser um número menor ou igual a ${context.value}`,
-        message: (field: Field, context: any) => `O campo ${field.getLabelOrPath()} deve ser um número menor ou igual a ${context.value}`
-    },
     "number.notEqual":{
         helperText: (field: Field, context: any) => `Não pode ser igual a ${context.value}`,
         message: (field: Field, context: any) => `O campo ${field.getLabelOrPath()} não pode ser igual a ${context.value}`
@@ -95,6 +87,14 @@ export const DATA_TYPES_PROVIDER_MESSAGE: any = {
     "number.odd":{
         helperText: (field: Field, context: any) => `Deve ser um número impar`,
         message: (field: Field, context: any) => `O campo ${field.getLabelOrPath()} deve ser um número impar`
+    },
+    "number.max":{
+        helperText: (field: Field, context: any) => `Deve ser um número maior ou igual a ${context.max}`,
+        message: (field: Field, context: any) => `O campo ${field.getLabelOrPath()} deve ser um número maior ou igual a ${context.max}`
+    },
+    "number.min":{
+        helperText: (field: Field, context: any) => `Deve ser um número menor ou igual a ${context.min}`,
+        message: (field: Field, context: any) => `O campo ${field.getLabelOrPath()} deve ser um número menor ou igual a ${context.min}`
     },
     /**
      * Object

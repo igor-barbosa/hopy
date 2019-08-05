@@ -1,5 +1,5 @@
 import {TypeNumber} from './../../src/library/types/TypeNumber'
-import { testTypesIfTheRuleMethodReturnInstance, testTypesIfTheRuleMethodCreateDynamicMethodInCommonsVariable, testTypeIfTheRuleMethodNotReturnErrorsWithValidValues, testTypesIfTheRuleMethodReturnObjectErrorWithInvalidValues, testTypesIfTheRuleMethodGenerateErrorsWithMessagePassedInArguments, testTypesIfTheRuleMethodGenerateErrorsWithMessageFunctionsPassedInArguments, testTypesShouldConvertToExpecetedValue } from "../../__helperTests__/testTypes";
+import { testTypesIfTheRuleMethodReturnInstance, testTypesIfTheRuleMethodCreateDynamicMethodInCommonsVariable, testTypeIfTheRuleMethodNotReturnErrorsWithValidValues, testTypesIfTheRuleMethodReturnObjectErrorWithInvalidValues, testTypesIfTheRuleMethodGenerateErrorsWithMessagePassedInArguments, testTypesIfTheRuleMethodGenerateErrorsWithMessageFunctionsPassedInArguments, testTypesShouldConvertToExpecetedValue, testTypes } from "../../__helperTests__/testTypes";
 import { ITypeOptions } from "../../src/interfaces/types/ITypeOptions";
 
 
@@ -202,81 +202,35 @@ describe('Test TypeNumber Class', () => {
             )
         });
 
-        describe('this.greaterOrEqual(5)', () => { 
-
-            const value = 5;
-            const providerTypeMethod = (options: ITypeOptions = {}) => new TypeNumber().isNumber().greaterOrEqual(value, options)
-            const errorType = "number.greaterOrEqual"
-            const commonName = "greaterOrEqual"
-            const validValues = [
-                5,6
-            ]
-            const invalidValues = [
-                4
-            ]
-    
-            testTypesIfTheRuleMethodReturnInstance(providerTypeMethod(), TypeNumber) 
-            testTypesIfTheRuleMethodCreateDynamicMethodInCommonsVariable(providerTypeMethod(), commonName)              
-            testTypeIfTheRuleMethodNotReturnErrorsWithValidValues(providerTypeMethod(), commonName, validValues)        
-            testTypesIfTheRuleMethodReturnObjectErrorWithInvalidValues(
-                providerTypeMethod(), 
-                commonName, 
-                errorType, 
-                invalidValues,
-                {value}
-            )
-            testTypesIfTheRuleMethodGenerateErrorsWithMessagePassedInArguments(
+        describe('this.max(5)', () => {   
+            const context = {max: 5} 
+            const providerTypeMethod = (options: ITypeOptions = {}) => (
+                new TypeNumber().isNumber().max(context.max,options)
+            )    
+            testTypes(
                 providerTypeMethod,
-                commonName,
-                errorType,
-                invalidValues[0],
-                {value}
-            )        
-            testTypesIfTheRuleMethodGenerateErrorsWithMessageFunctionsPassedInArguments(
-                providerTypeMethod,
-                commonName,
-                errorType,
-                invalidValues[0],
-                {value}
+                TypeNumber,
+                'number.max',
+                'max',
+                [4,5],
+                [6],
+                context
             )
         });
 
-        describe('this.lessOrEqual(5)', () => { 
-
-            const value = 5;
-            const providerTypeMethod = (options: ITypeOptions = {}) => new TypeNumber().isNumber().lessOrEqual(value, options)
-            const errorType = "number.lessOrEqual"
-            const commonName = "lessOrEqual"
-            const validValues = [
-                4,5
-            ]
-            const invalidValues = [
-                6
-            ]
-    
-            testTypesIfTheRuleMethodReturnInstance(providerTypeMethod(), TypeNumber) 
-            testTypesIfTheRuleMethodCreateDynamicMethodInCommonsVariable(providerTypeMethod(), commonName)              
-            testTypeIfTheRuleMethodNotReturnErrorsWithValidValues(providerTypeMethod(), commonName, validValues)        
-            testTypesIfTheRuleMethodReturnObjectErrorWithInvalidValues(
-                providerTypeMethod(), 
-                commonName, 
-                errorType, 
-                invalidValues,
-                {value}
-            )
-            testTypesIfTheRuleMethodGenerateErrorsWithMessagePassedInArguments(
+        describe('this.min(5)', () => {   
+            const context = {min: 5} 
+            const providerTypeMethod = (options: ITypeOptions = {}) => (
+                new TypeNumber().isNumber().min(context.min,options)
+            )    
+            testTypes(
                 providerTypeMethod,
-                commonName,
-                errorType,
-                invalidValues[0],
-                {value}
-            )        
-            testTypesIfTheRuleMethodGenerateErrorsWithMessageFunctionsPassedInArguments(
-                providerTypeMethod,
-                commonName,
-                errorType,
-                invalidValues[0],
-                {value}
+                TypeNumber,
+                'number.min',
+                'min',
+                [5,6],
+                [4],                
+                context
             )
         });
 
