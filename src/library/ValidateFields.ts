@@ -110,10 +110,8 @@ export class ValidateFields {
             await type.specifics.defaultValue(field)
         }
 
-        if(!this._errors[path]) {
-            NestedProperty.set(this._data, path, field.value);
-        }
-
+        
+        NestedProperty.set(this._data, path, field.value);
     }
 
     public async init(body: any, schema: any) : Promise<ValidateFields> {
