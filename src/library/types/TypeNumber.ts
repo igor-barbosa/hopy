@@ -206,13 +206,13 @@ export class TypeNumber extends Types {
      * string e realiza a conversão para número.
      * @param number 
      */
-    private async isValidNumber(number: number) : Promise<Number|number> {        
+    private async isValidNumber(number: number|string) : Promise<Number|number> {        
         return new Promise((resolve, reject) => {
             const isNumber = typeof number === "number";
-            if(isNumber) resolve(number)
+            if(isNumber) resolve(number as number)
 
             const isStringNumberValid = (typeof number === "string" && new RegExp(/^(\d+|\d+?.\d+)$/,'gi').test(number))
-            if(isStringNumberValid) return resolve(new Number(number))
+            if(isStringNumberValid) return resolve(parseFloat(number as string))
 
             reject()
         })
