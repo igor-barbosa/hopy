@@ -73,8 +73,8 @@ export class ValidateFields {
         }
     }
 
-    private makeField(path: string, type: Types){
-        return new Field(path, NestedProperty.get(this._body, path), type);
+    private makeField(path: string, type: Types, value: any){
+        return new Field(path, value, type);
     }
 
     private setError(path: string, error: any) {
@@ -85,7 +85,15 @@ export class ValidateFields {
     }
 
     private async validateCommonMethods(type: Types, path: string) {
-        const field: Field = (type instanceof TypeObject || type instanceof TypeArray) ? this.makeField(path, type) : this._fields[path];
+        const isObject = type instanceof TypeObject;
+        const isArray = type instanceof TypeArray;
+        let field: Field;
+        if(isObject || isArray){
+            field = (isObject) ? this.makeField(path, type, {}) : this.makeField(path, type, [])
+        } else {
+            field = this._fields[path];
+        }
+        
         if(type.specifics.required){
             const error = await type.specifics.required(field)
             if(error) this.setError(path, error)
