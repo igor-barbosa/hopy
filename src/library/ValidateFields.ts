@@ -137,10 +137,21 @@ export class ValidateFields {
         }
     }
 
+    public getLabels(){
+        const labels: any = {};
+        for(const fieldKey of Object.keys(this._fields)) {
+            const field = this._fields[fieldKey];
+            labels[field.path] = field.label;
+        }
+
+        return labels;
+    }
+
     public getResponse() {
         return {
             errors: (Object.keys(this._errors).length > 0) ? this._errors : false,
-            data: this._data
+            data: this._data,
+            labels: this.getLabels()
         }
     }
 

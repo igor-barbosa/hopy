@@ -7,7 +7,7 @@ export class Field {
     public value: any;
     public shadowValue: any = null;
     public type: Types;
-    public label : string|null = null;
+    public label : string|number|null = null;
 
     public error: any = null;
 
