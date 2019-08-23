@@ -2,19 +2,19 @@ import { Field } from "./Field";
 
 export const DATA_TYPES_PROVIDER_MESSAGE: any = {
     "string" : {
-        helperText: (field: Field, context: any) => `Precisa ser um texto`,
-        message: (field: Field, context: any) => `O campo ${field.getLabelOrPath()} precisa ser um texto`
+        helperText: (field: Field, context: any) => `Valor inválido`,
+        message: (field: Field, context: any) => `O campo ${field.getLabelOrPath()} contém um valor inválido.`
     },
     "string.email":{
         helperText: (field: Field, context: any) => `Formato de e-mail inválido`,
-        message: (field: Field, context: any) => `O campo ${field.getLabelOrPath()} precisa ter um formato deil válido`
+        message: (field: Field, context: any) => `O campo ${field.getLabelOrPath()} deve conter um e-mail válido.`
     },
     "string.max":{
-        helperText: (field: Field, context: any) => `Deve conter no máximo ${context.max} caracteres`,
+        helperText: (field: Field, context: any) => `Máximo caracteres: ${context.max}`,
         message: (field: Field, context: any) => `O campo ${field.getLabelOrPath()} deve conter no máximo ${context.max} caracteres`
     },
     "string.min":{
-        helperText: (field: Field, context: any) => `Deve conter no mínimo ${context.max} caracteres`,
+        helperText: (field: Field, context: any) => `Mínimo caracteres: ${context.max}`,
         message: (field: Field, context: any) => `O campo ${field.getLabelOrPath()} deve conter no mínimo ${context.max} caracteres`
     },
     "string.between":{
@@ -136,5 +136,12 @@ export const DATA_TYPES_PROVIDER_MESSAGE: any = {
     "date.after":{
         helperText: (field: Field, context: any) => `Deve ser posterior a ${context.date.format('DD/MM/YYYY')}`,
         message: (field: Field, context: any) => `O campo ${field.getLabelOrPath()} deve ser posterior a ${context.date.format('DD/MM/YYYY')}`
+    },
+    /**
+     * boolean
+     */
+    "boolean":{
+        helperText: (field: Field, context: any) => `Data inválida`,
+        message: (field: Field, context: any) => `O campo ${field.getLabelOrPath()} deve ser uma data válida.`
     },
 }   

@@ -14,6 +14,7 @@ export * from "./library/ValidateFields";
 export * from "./library/commons";
 export * from "./library/types/TypeAny";
 export * from "./library/types/TypeArray";
+export * from "./library/types/TypeBoolean";
 export * from "./library/types/TypeConditional";
 export * from "./library/types/TypeNumber";
 export * from "./library/types/TypeObject";

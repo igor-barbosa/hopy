@@ -7,6 +7,7 @@ import {TypeDate} from "./types/typeDate";
 import { TypeConditional, IConditionalCallback } from "./types/TypeConditional";
 import { ITypeOptions, IDateOptions } from "../interfaces/types/ITypeOptions";
 import { TypeAny } from "./types/TypeAny";
+import { TypeBoolean } from './types/TypeBoolean';
 
 export class Hopy {
 
@@ -70,5 +71,13 @@ export class Hopy {
 
     public static get any(){
         return new TypeAny().any()
+    }
+
+    public static isBoolean(options: ITypeOptions = {}){
+        return new TypeBoolean().isBoolean(options);
+    }
+
+    public static get boolean(){
+        return new TypeBoolean().boolean;
     }
 }
