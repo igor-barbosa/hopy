@@ -78,11 +78,5 @@ export abstract class Types {
     public getBodyValue(path: string){
         return NestedProperty.get(this.body, path);
     }
-
-    public label(label: string|number) {
-        return this.addCommon('label', async (field:Field) => {
-            field.label = label;
-        });
-    }
 }
 

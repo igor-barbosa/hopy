@@ -2,7 +2,7 @@ import {Types} from "./Types";
 import {Field} from "../Field";
 import moment from 'moment';
 import { IDateOptions, ITypeOptions } from "../../interfaces/types/ITypeOptions";
-import { isRequired, custom, defaultValue } from "../commons";
+import { isRequired, custom, defaultValue, label } from '../commons';
 
 export class TypeDate extends Types {
 
@@ -13,7 +13,8 @@ export class TypeDate extends Types {
     public isRequired = isRequired<TypeDate>(this);
     public defaultValue = defaultValue<TypeDate>(this)
     public custom = custom<TypeDate>(this)
-    
+    public label = label<TypeDate>(this)
+
     public isDate(options: IDateOptions = {}) {
         return this.addCommon('date', async (field: Field) => {
             if(field.hasRequirements()) {

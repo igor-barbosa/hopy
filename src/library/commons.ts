@@ -65,3 +65,12 @@ export function notEqualTo<T extends Types>(type: Types){
         return <T>type;
     }
 }
+
+export function label<T extends Types>(type: Types){
+    return (label: string|number|null) : T => {
+        type.addCommon('label', async(field: Field) => {
+            field.label = label;
+        })
+        return <T>type;
+    }
+}

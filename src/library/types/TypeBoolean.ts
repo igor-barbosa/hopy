@@ -1,7 +1,7 @@
 import {Types} from "./Types";
 import {Field} from "../Field";
 import { ITypeOptions } from "../../interfaces/types/ITypeOptions";
-import { isRequired, defaultValue, custom } from "../commons";
+import { isRequired, defaultValue, custom, label } from '../commons';
 
 export class TypeBoolean extends Types {
 
@@ -9,6 +9,7 @@ export class TypeBoolean extends Types {
     
     public isRequired = isRequired<TypeBoolean>(this);
     public defaultValue = defaultValue<TypeBoolean>(this)
+    public label = label<TypeBoolean>(this)
     
     public get boolean(){
         return this.isBoolean();

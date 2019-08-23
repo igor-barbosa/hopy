@@ -1,7 +1,7 @@
 import {Types} from "./Types";
 import {Field} from "../Field";
 import { ITypeOptions } from "../../interfaces/types/ITypeOptions";
-import { isRequired, defaultValue, custom, equalTo, notEqualTo } from '../commons';
+import { isRequired, defaultValue, custom, equalTo, notEqualTo, label } from '../commons';
 
 export class TypeString extends Types {
 
@@ -12,6 +12,7 @@ export class TypeString extends Types {
     public custom = custom<TypeString>(this)
     public equalTo = equalTo<TypeString>(this)
     public notEqualTo = notEqualTo<TypeString>(this)
+    public label = label<TypeString>(this)
     
     public isString(options: ITypeOptions = {}) {
         return this.addCommon('string', async (field) => {

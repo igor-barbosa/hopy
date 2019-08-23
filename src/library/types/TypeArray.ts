@@ -3,7 +3,7 @@ import {TypeObject} from "./TypeObject";
 import {Field} from "../Field";
 import { ITypeOptions } from "../../interfaces/types/ITypeOptions";
 import { ISchemaOrType } from "../../interfaces/types/ISchemaOrType";
-import { isRequired, defaultValue, custom } from "../commons";
+import { isRequired, defaultValue, custom, label } from '../commons';
 
 export class TypeArray extends Types {
 
@@ -12,7 +12,8 @@ export class TypeArray extends Types {
     public isRequired = isRequired<TypeArray>(this);
     public defaultValue = defaultValue<TypeArray>(this)
     public custom = custom<TypeArray>(this)
-    
+    public label = label<TypeArray>(this)
+
     public isArray(options: ITypeOptions = {}){
         return this.addCommon('array', async (field: Field) => {            
             if(field.hasRequirements()) {
