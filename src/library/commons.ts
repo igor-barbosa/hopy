@@ -35,3 +35,33 @@ export function custom<T extends Types>(type: Types){
         return <T>type;
     }
 }
+
+export function equalTo<T extends Types>(type: Types){
+    return (values: any, options: ITypeOptions = {}) : T => {
+        type.addCommon('equalTo', async(field: Field) => {
+            if (field.hasRequirements()){
+                const valuesList = (Array.isArray(values)) ? values: [values];
+                const isValid = (valuesList.indexOf(field.value) >= 0)
+                if(!isValid){
+                    return type.applyError(`${type.BASE_STRING}.equalTo`, field, options, {values: valuesList}) 
+                }
+            }
+        })
+        return <T>type;
+    }
+}
+
+export function notEqualTo<T extends Types>(type: Types){
+    return (values: any, options: ITypeOptions = {}) : T => {
+        type.addCommon('notEqualTo', async(field: Field) => {
+            if (field.hasRequirements()){
+                const valuesList = (Array.isArray(values)) ? values: [values];
+                const isValid = (valuesList.indexOf(field.value) === -1)
+                if(!isValid){
+                    return type.applyError(`${type.BASE_STRING}.notEqualTo`, field, options, {values: valuesList}) 
+                }
+            }
+        })
+        return <T>type;
+    }
+}

@@ -7,7 +7,7 @@ export const DATA_TYPES_PROVIDER_MESSAGE: any = {
     },
     "string.email":{
         helperText: (field: Field, context: any) => `Formato de e-mail inválido`,
-        message: (field: Field, context: any) => `O campo ${field.getLabelOrPath()} deve conter um e-mail válido.`
+        message: (field: Field, context: any) => `O campo ${field.getLabelOrPath()} contém o formato de e-mail válido.`
     },
     "string.max":{
         helperText: (field: Field, context: any) => `Máximo caracteres: ${context.max}`,
@@ -21,13 +21,17 @@ export const DATA_TYPES_PROVIDER_MESSAGE: any = {
         helperText: (field: Field, context: any) => `Deve conter entre ${context.min} e ${context.max} caracteres`,
         message: (field: Field, context: any) => `O campo ${field.getLabelOrPath()} deve conter entre ${context.min} e ${context.max} caracteres`
     },
-    "string.equal":{
-        helperText: (field: Field, context: any) => `Deve ser igual a ${context.equal}`,
-        message: (field: Field, context: any) => `O campo ${field.getLabelOrPath()} deve ser igual a ${context.equal}`
+    "string.equalTo":{
+        helperText: (field: Field, context: any) => `Deve ser igual a ${context.values.join(',')}`,
+        message: (field: Field, context: any) => `O campo ${field.getLabelOrPath()} deve ser igual a ${context.values.join(',')}`
+    },
+    "string.notEqualTo":{
+        helperText: (field: Field, context: any) => `Não deve ser igual a ${context.values.join(',')}`,
+        message: (field: Field, context: any) => `O campo ${field.getLabelOrPath()} não deve ser igual a ${context.values.join(',')}`
     },
     "string.regex":{
-        helperText: (field: Field, context: any) => `Deve ser igual passar na regex /${context.regex}/${context.flags}`,
-        message: (field: Field, context: any) => `O campo ${field.getLabelOrPath()} deve ser igual passar na regex /${context.regex}/${context.flags}`
+        helperText: (field: Field, context: any) => `Formato inválido`,
+        message: (field: Field, context: any) => `O campo ${field.getLabelOrPath()} cotém o formato inválido`
     },
     "string.required":{
         helperText: (field: Field, context: any) => `Campo obrigatório`,
@@ -37,7 +41,7 @@ export const DATA_TYPES_PROVIDER_MESSAGE: any = {
      * Number
      */
     "number":{
-        helperText: (field: Field, context: any) => `Deve ser numérico`,
+        helperText: (field: Field, context: any) => `Deve ser um número`,
         message: (field: Field, context: any) => `O campo ${field.getLabelOrPath()} deve ser numérico`
     },
     "number.safe":{
@@ -56,13 +60,13 @@ export const DATA_TYPES_PROVIDER_MESSAGE: any = {
         helperText: (field: Field, context: any) => `Deve ser um número menor que ${context.value}`,
         message: (field: Field, context: any) => `O campo ${field.getLabelOrPath()} deve ser um número menor que ${context.value}`
     },
-    "number.notEqual":{
-        helperText: (field: Field, context: any) => `Não pode ser igual a ${context.value}`,
-        message: (field: Field, context: any) => `O campo ${field.getLabelOrPath()} não pode ser igual a ${context.value}`
+    "number.notEqualTo":{
+        helperText: (field: Field, context: any) => `Não deve ser igual a ${context.values.join(',')}`,
+        message: (field: Field, context: any) => `O campo ${field.getLabelOrPath()} não deve ser igual a ${context.values.join(',')}`
     },
     "number.equalTo":{
-        helperText: (field: Field, context: any) => `Deve ser igual a ${context.value}`,
-        message: (field: Field, context: any) => `O campo ${field.getLabelOrPath()} deve ser igual a ${context.value}`
+        helperText: (field: Field, context: any) => `Deve ser igual a ${context.values.join(',')}`,
+        message: (field: Field, context: any) => `O campo ${field.getLabelOrPath()} deve ser igual a ${context.values.join(',')}`
     },
     "number.positive":{
         helperText: (field: Field, context: any) => `Deve ser um número positivo`,
@@ -73,7 +77,7 @@ export const DATA_TYPES_PROVIDER_MESSAGE: any = {
         message: (field: Field, context: any) => `O campo ${field.getLabelOrPath()} deve ser um número negativo`
     },
     "number.integer":{
-        helperText: (field: Field, context: any) => `Deve ser um número intedecimiro`,
+        helperText: (field: Field, context: any) => `Deve ser um número inteiro`,
         message: (field: Field, context: any) => `O campo ${field.getLabelOrPath()} deve ser um número inteiro`
     },
     "number.required":{
@@ -89,26 +93,26 @@ export const DATA_TYPES_PROVIDER_MESSAGE: any = {
         message: (field: Field, context: any) => `O campo ${field.getLabelOrPath()} deve ser um número impar`
     },
     "number.max":{
-        helperText: (field: Field, context: any) => `Deve ser um número maior ou igual a ${context.max}`,
-        message: (field: Field, context: any) => `O campo ${field.getLabelOrPath()} deve ser um número maior ou igual a ${context.max}`
+        helperText: (field: Field, context: any) => `Deve ser um número menor ou igual a ${context.max}`,
+        message: (field: Field, context: any) => `O campo ${field.getLabelOrPath()} deve ser um número menor ou igual a ${context.max}`        
     },
     "number.min":{
-        helperText: (field: Field, context: any) => `Deve ser um número menor ou igual a ${context.min}`,
-        message: (field: Field, context: any) => `O campo ${field.getLabelOrPath()} deve ser um número menor ou igual a ${context.min}`
+        helperText: (field: Field, context: any) => `Deve ser um número maior ou igual a ${context.min}`,
+        message: (field: Field, context: any) => `O campo ${field.getLabelOrPath()} deve ser um número maior ou igual a ${context.min}`
     },
     /**
      * Object
      */
     "object":{
-        helperText: (field: Field, context: any) => `Deve ser um objeto`,
-        message: (field: Field, context: any) => `O campo ${field.getLabelOrPath()} deve ser um objeto`
+        helperText: (field: Field, context: any) => `Fomarto invalido`,
+        message: (field: Field, context: any) => `O campo ${field.getLabelOrPath()} contém o formato inválido`
     },
     /**
      * Array
      */
     "array":{
-        helperText: (field: Field, context: any) => `Deve ser um array`,
-        message: (field: Field, context: any) => `O campo ${field.getLabelOrPath()} deve ser um array`
+        helperText: (field: Field, context: any) => `Fomarto invalido`,
+        message: (field: Field, context: any) => `O campo ${field.getLabelOrPath()} contém o formato inválido`
     },
     "array.min":{
         helperText: (field: Field, context: any) => `Deve conter no mínimo ${context.min} itens`,
@@ -141,7 +145,7 @@ export const DATA_TYPES_PROVIDER_MESSAGE: any = {
      * boolean
      */
     "boolean":{
-        helperText: (field: Field, context: any) => `Data inválida`,
-        message: (field: Field, context: any) => `O campo ${field.getLabelOrPath()} deve ser uma data válida.`
+        helperText: (field: Field, context: any) => `Valor inválido`,
+        message: (field: Field, context: any) => `O campo ${field.getLabelOrPath()} contém um valor inválido`
     },
 }   

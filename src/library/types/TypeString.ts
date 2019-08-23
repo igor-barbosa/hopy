@@ -1,7 +1,7 @@
 import {Types} from "./Types";
 import {Field} from "../Field";
 import { ITypeOptions } from "../../interfaces/types/ITypeOptions";
-import { isRequired, defaultValue, custom } from "../commons";
+import { isRequired, defaultValue, custom, equalTo, notEqualTo } from '../commons';
 
 export class TypeString extends Types {
 
@@ -10,6 +10,8 @@ export class TypeString extends Types {
     public isRequired = isRequired<TypeString>(this);
     public defaultValue = defaultValue<TypeString>(this)
     public custom = custom<TypeString>(this)
+    public equalTo = equalTo<TypeString>(this)
+    public notEqualTo = notEqualTo<TypeString>(this)
     
     public isString(options: ITypeOptions = {}) {
         return this.addCommon('string', async (field) => {
@@ -62,17 +64,6 @@ export class TypeString extends Types {
                 const isValid = (field.value.toString().trim().length >= min && field.value.toString().trim().length <= max)
                 if(!isValid){
                     return this.applyError('string.between', field, options, { min, max }) 
-                }
-            }
-        })
-    }
-
-    public equal(equal:string, options: ITypeOptions = {}){
-        return this.addCommon('equal', async(field: Field) => {
-            if (field.hasRequirements()){
-                const isValid = (field.value === equal)
-                if(!isValid){
-                    return this.applyError('string.equal', field, options, {equal}) 
                 }
             }
         })

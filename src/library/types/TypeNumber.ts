@@ -1,7 +1,7 @@
 import {Types} from "./Types";
 import {Field} from "../Field";
 import { ITypeOptions } from "../../interfaces/types/ITypeOptions";
-import { isRequired, custom, defaultValue } from "../commons";
+import { isRequired, custom, defaultValue, equalTo, notEqualTo } from '../commons';
 
 export class TypeNumber extends Types {
     static SAFE = {
@@ -14,6 +14,8 @@ export class TypeNumber extends Types {
     public isRequired = isRequired<TypeNumber>(this);
     public defaultValue = defaultValue<TypeNumber>(this)
     public custom = custom<TypeNumber>(this)
+    public equalTo = equalTo<TypeNumber>(this)
+    public notEqualTo = notEqualTo<TypeNumber>(this)
     
     public isNumber(options: ITypeOptions = {}) {
         return this.addCommon('number', async (field: Field) => {            
@@ -119,28 +121,6 @@ export class TypeNumber extends Types {
                 const isValid = (field.value <= value);
                 if(!isValid){
                     return this.applyError('number.lessOrEqual', field, options, {value})  
-                }
-            }
-        });
-    }
-
-    public notEqual(value: number, options: ITypeOptions = {}){
-        return this.addCommon('notEqual', async (field: Field) => {            
-            if(field.hasRequirements()) {
-                const isValid = (field.value !== value);
-                if(!isValid){
-                    return this.applyError('number.notEqual', field, options, {value})  
-                }
-            }
-        });
-    }
-
-    public equalTo(value: number, options: ITypeOptions = {}){
-        return this.addCommon('equalTo', async (field: Field) => {            
-            if(field.hasRequirements()) {
-                const isValid = (field.value === value);
-                if(!isValid){
-                    return this.applyError('number.equalTo', field, options, {value})  
                 }
             }
         });
