@@ -131,7 +131,11 @@ export const DATA_TYPES_PROVIDER_MESSAGE: any = {
      */
     "date":{
         helperText: (field: Field, context: any) => `Data inválida`,
-        message: (field: Field, context: any) => `O campo ${field.getLabelOrPath()} deve ser uma data válida.`
+        message: (field: Field, context: any) => `O campo ${field.getLabelOrPath()} deve ser uma data válida`
+    },
+    "date.required":{
+        helperText: (field: Field, context: any) => `Campo obrigatório`,
+        message: (field: Field, context: any) => `O campo ${field.getLabelOrPath()} é obrigatório`
     },
     "date.before":{
         helperText: (field: Field, context: any) => `Deve ser anterior a ${context.date.format('DD/MM/YYYY')}`,
@@ -147,5 +151,9 @@ export const DATA_TYPES_PROVIDER_MESSAGE: any = {
     "boolean":{
         helperText: (field: Field, context: any) => `Valor inválido`,
         message: (field: Field, context: any) => `O campo ${field.getLabelOrPath()} contém um valor inválido`
+    },
+    "boolean.required":{
+        helperText: (field: Field, context: any) => `Campo obrigatório`,
+        message: (field: Field, context: any) => `O campo ${field.getLabelOrPath()} é obrigatório`
     },
 }   
